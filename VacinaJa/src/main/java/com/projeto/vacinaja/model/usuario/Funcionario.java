@@ -1,5 +1,7 @@
 package com.projeto.vacinaja.model.usuario;
 
+import java.util.ArrayList;
+
 public class Funcionario extends Usuario {
 	public String cargo;
 	public String localTrabalho;

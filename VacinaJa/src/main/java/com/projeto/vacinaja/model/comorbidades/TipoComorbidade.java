@@ -3,40 +3,40 @@ package com.projeto.vacinaja.model.comorbidades;
 public enum TipoComorbidade {
 	 ObesidadeMorbida {
 		@Override
-		public Comorbidade getComorbidade() {
-			return new ObesidadeMorbida();
+		public String getComorbidade() {
+			return "Obesidade Mórbida";
 		}
 	 },
 	 Diabetes {
 		@Override
-		public Comorbidade getComorbidade() {
-			return new Diabetes();
+		public String getComorbidade() {
+			return "Diabetes";
 		}
 	 },
 	 InsuficiencaCardiaca {
 		@Override
-		public Comorbidade getComorbidade() {
-			return new InsuficienciaCardiaca();
+		public String getComorbidade() {
+			return "Insuficiência Cardíaca";
 		}
 	 },
 	 SindromeDeDown {
 		@Override
-		public Comorbidade getComorbidade() {
-			return new SindromeDown();
+		public String getComorbidade() {
+			return "Síndrome de Down";
 		}
 	 },
 	 DoençaCardiovascularCronica {
 		@Override
-		public Comorbidade getComorbidade() {
-			return new DoençaCardiovascularCronica();
+		public String getComorbidade() {
+			return "Doença Cardiovascular Crônica";
 		}
 	 },
 	 DoencaRenalCronica {
 		@Override
-		public Comorbidade getComorbidade() {
-			return new DoençaCardiovascularCronica();
+		public String getComorbidade() {
+			return "Doença Renal Crônica";
 		}
 	 };
 	
-	public abstract Comorbidade getComorbidade();
+	public abstract String getComorbidade();
 }

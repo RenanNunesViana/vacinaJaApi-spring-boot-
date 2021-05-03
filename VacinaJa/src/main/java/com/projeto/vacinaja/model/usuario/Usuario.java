@@ -1,5 +1,7 @@
 package com.projeto.vacinaja.model.usuario;
 
+import java.util.ArrayList;
+
 import com.projeto.vacinaja.model.comorbidades.Comorbidade;
 
 public abstract class Usuario {
@@ -13,7 +15,7 @@ public abstract class Usuario {
 	public String telefone;
 	public String profissao;
 	//public State estadoVacina;
-	public Comorbidade comorbidade;
+	public String comorbidade;
 	
 	/*US-14*/
 	public void alteraNomeCompleto(String novoNome) {

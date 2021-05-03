@@ -17,7 +17,7 @@ public class Cidadao extends Usuario {
 		this.telefone = telefone;
 		this.profissao = profissao;
 		
-		TipoComorbidade tipoComorbidade = TipoComorbidade.values()[option - 1]; //Mostar quais opções de comorbidade;
+		TipoComorbidade tipoComorbidade = TipoComorbidade.values()[option - 1]; //Mostrar quais opções de comorbidade;
 		this.comorbidade = tipoComorbidade.getComorbidade();
 		
 		//this.estadoVacina = NaoHabilitado();  //Arrumar ao criar os estados da vacina;
