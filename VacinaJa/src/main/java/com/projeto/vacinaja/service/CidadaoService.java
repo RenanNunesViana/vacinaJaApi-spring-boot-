@@ -1,5 +1,5 @@
 package com.projeto.vacinaja.service;
 
-public class Temp4 {
+public class CidadaoService {
 
 }
