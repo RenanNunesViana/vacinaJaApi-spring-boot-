@@ -2,17 +2,16 @@ package com.projeto.vacinaja.model.usuario;
 
 import java.util.ArrayList;
 
-import com.projeto.vacinaja.model.vacina.TipoVacina;
 import com.projeto.vacinaja.model.vacina.Vacina;
 
-public class Funcionario extends EstadoUsuario {
-	private static Usuario usuario;
+public class Funcionario implements Usuario {
+	
 	public String id;
 	public String cargo;
+	public String cpf;
 	public String localTrabalho;
 	
 	public Funcionario() {
-		super(usuario);
 	}
 	
 	public void setCargo(String cargo) {
@@ -40,21 +39,7 @@ public class Funcionario extends EstadoUsuario {
 	}
 
 	@Override
-	public void loginCidadao(String login) {
+	public void fazerLogin(String CPF) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void loginFuncionario(String login) {
-		if(login.equals(this.id)) {
-			usuario.changeState(new Funcionario());
-		}	
-	}
-
-	@Override
-	public void loginAdminstrador(String login) {
-		// TODO Auto-generated method stub
-		
 	}
 }

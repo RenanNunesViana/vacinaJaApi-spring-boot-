@@ -1,12 +1,7 @@
 package com.projeto.vacinaja.model.usuario;
 
-import com.projeto.vacinaja.model.comorbidades.*;
-import com.projeto.vacinaja.model.vacina.State;
-
-
-public class Cidadao extends EstadoUsuario {
+public class Cidadao implements Usuario {
 	
-	private static Usuario usuario;
 	public String id;
 	public String nomeCompleto;
 	public String endereco;
@@ -16,12 +11,8 @@ public class Cidadao extends EstadoUsuario {
 	public String dataNascimento;
 	public String telefone;
 	public String profissao;
-	public State estadoVacina;
+	public EstadoVacinacao estadoVacinacao;
 	public String comorbidade;
-	
-	public Cidadao() {
-		super(usuario);
-	}
 	
 	/*US-14*/
 	public void alteraNomeCompleto(String novoNome) {
@@ -49,12 +40,10 @@ public class Cidadao extends EstadoUsuario {
 		this.profissao = novaProfissao;
 	}
 	
-	//Se houver diferentes bancos, será necessário utilizar override neste método para cada tipo de user;
-		/*US- 02 | 07 |12 */public void fazerLogin(String CPF) {  
+	public void fazerLogin(String CPF) {  
 	}
 
-		
-	/*US-15*/public State consultarMeuEstagioVacinacao() {
+	/*US-15*/public EstadoVacinacao consultarMeuEstagioVacinacao() {
 		return this.estadoVacina;
 	}
 		
@@ -63,22 +52,5 @@ public class Cidadao extends EstadoUsuario {
 	/*US-17*/public String agendarVacinacao() {
 		String confirmacaoAgendamento = "";
 		return confirmacaoAgendamento;
-	}
-
-	@Override
-	public void loginCidadao(String login) {
-		if(login.equals(this.id)) {
-			usuario.changeState(new Cidadao());
-		}
-	}
-
-	@Override
-	public void loginFuncionario(String login) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void loginAdminstrador(String login) {
-		// TODO Auto-generated method stub
 	}
 }

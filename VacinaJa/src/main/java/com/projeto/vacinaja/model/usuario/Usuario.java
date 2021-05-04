@@ -1,12 +1,6 @@
 package com.projeto.vacinaja.model.usuario;
 
-public class Usuario {
+public interface Usuario {
 	
-	public String nome;
-	public String cpf;
-	private EstadoUsuario estado;
-	
-	public void changeState(EstadoUsuario estado) {
-		this.estado = estado;
-	}
+	public void fazerLogin(String CPF);
 }
