@@ -1,9 +1,12 @@
 package com.projeto.vacinaja.model.usuario;
 
-public class Administrador extends Funcionario {
+public class Administrador extends EstadoUsuario {
+	
+	public String id;
+	private static Usuario usuario;
 	
 	public Administrador() {
-		
+		super(usuario);
 	}
 	
 	/*US-01 -  Persistência dos dados armazenados;*/
@@ -19,5 +22,24 @@ public class Administrador extends Funcionario {
 	
 	/*US-05*/public void cadastrarTipoVacina(String fabricante,int numeroDosesNecessarias, 
 			String tempoEntreDoses) {
+	}
+
+	@Override
+	public void loginCidadao(String login) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loginFuncionario(String login) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loginAdminstrador(String login) {
+		if(login.equals(this.id)) {
+			usuario.changeState(new Funcionario());
+		}	
 	}
 }
