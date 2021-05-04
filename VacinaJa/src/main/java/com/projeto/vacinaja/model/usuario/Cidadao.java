@@ -11,7 +11,7 @@ public class Cidadao implements Usuario {
 	public String dataNascimento;
 	public String telefone;
 	public String profissao;
-	public EstadoVacinacao estadoVacinacao;
+	//public EstadoVacinacao estadoVacinacao;
 	public String comorbidade;
 	
 	/*US-14*/
@@ -44,7 +44,7 @@ public class Cidadao implements Usuario {
 	}
 
 	/*US-15*/public EstadoVacinacao consultarMeuEstagioVacinacao() {
-		return this.estadoVacina;
+		return this.estadoVacinacao;
 	}
 		
 	/*US-16 - Notificar os usuarios com msgm SMS quando estiverem habilitados;*/

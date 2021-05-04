@@ -2,8 +2,6 @@ package com.projeto.vacinaja.model.usuario;
 
 import java.util.ArrayList;
 
-import com.projeto.vacinaja.model.vacina.Vacina;
-
 public class Funcionario implements Usuario {
 	
 	public String id;
@@ -22,7 +20,7 @@ public class Funcionario implements Usuario {
 		this.cargo = cargo;
 	}
 	
-	/*US-08*/public void cadastrarLoteDeVacina(String validade, int numeroDoses, TipoVacina tipo) {
+	/*US-08*/public void cadastrarLoteDeVacina(String validade, int numeroDoses, String tipo) {
 		
 	}
 	
