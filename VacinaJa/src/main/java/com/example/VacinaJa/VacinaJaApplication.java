@@ -1,4 +1,4 @@
-package com.projeto.vacinaja;
+package com.example.VacinaJa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
