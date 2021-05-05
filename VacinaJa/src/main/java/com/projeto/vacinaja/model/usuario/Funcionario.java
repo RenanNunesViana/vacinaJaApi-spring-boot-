@@ -2,6 +2,8 @@ package com.projeto.vacinaja.model.usuario;
 
 import java.util.ArrayList;
 
+import com.projeto.vacinaja.model.vacina.Vacina;
+
 public class Funcionario implements Usuario {
 	
 	public String id;
