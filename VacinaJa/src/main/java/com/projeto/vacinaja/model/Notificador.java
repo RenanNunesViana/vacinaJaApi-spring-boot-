@@ -12,6 +12,9 @@ public class Notificador {
 		this.cidadaosNotificaveis = new ArrayList<Notificavel>();
 	}
 	
+	public void notificarTodos() {
+
+	}
 
 	public void notificaCidadao(String cpfCidadao) {
 		// adicionar contexto da notificacao?
