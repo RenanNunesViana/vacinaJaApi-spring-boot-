@@ -1,6 +1,7 @@
 package com.projeto.vacinaja.service;
 
 import com.projeto.vacinaja.model.vacina.LoteVacina;
+import com.projeto.vacinaja.model.vacina.Vacina;
 import com.projeto.vacinaja.repository.LoteVacinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class LoteVacinaServiceImpl implements LoteVacinaService{
     }
 
     @Override
-    public Optional<LoteVacina> pegarLoteVacina(long idLoteVacina) {
-        return this.loteVacinaRepository.findById(idLoteVacina);
+    public List<LoteVacina> consultarLotePorVacina(Vacina vacina) {
+        return this.loteVacinaRepository.findByVacina(vacina);
     }
 
     @Override
