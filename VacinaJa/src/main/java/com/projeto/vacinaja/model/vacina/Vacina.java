@@ -11,13 +11,13 @@ public class Vacina {
 
     @Id
     private String nomeVacina;
-    private String fabicante;
+    private String fabricante;
     private int numeroDoses;
     private int diasEntreDoses;
 
     public Vacina(String nomeVacina, String fabicante, int numeroDoses, int diasEntreDoses) {
         this.nomeVacina = nomeVacina;
-        this.fabicante = fabicante;
+        this.fabricante = fabicante;
         this.numeroDoses = numeroDoses;
         this.diasEntreDoses = diasEntreDoses;
     }
@@ -35,11 +35,11 @@ public class Vacina {
     }
 
     public String getFabicante() {
-        return fabicante;
+        return fabricante;
     }
 
     public void setFabicante(String fabicante) {
-        this.fabicante = fabicante;
+        this.fabricante = fabicante;
     }
 
     public int getNumeroDoses() {
@@ -63,7 +63,7 @@ public class Vacina {
     public String toString() {
         return "Vacina{" +
                 "nomeVacina='" + nomeVacina  + ",\n" +
-                "fabicante='" + fabicante + ",\n" +
+                "fabicante='" + fabricante + ",\n" +
                 "numeroDoses=" + numeroDoses + ",\n" +
                 "diasEntreDoses=" + diasEntreDoses + ",\n" +
                 '}';
