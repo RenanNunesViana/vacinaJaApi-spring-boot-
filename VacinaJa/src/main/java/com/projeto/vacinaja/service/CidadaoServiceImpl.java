@@ -36,8 +36,7 @@ public class CidadaoServiceImpl implements CidadaoService{
 	@Override
 	public EstadoVacinacao consultarEstagioVacinacao(String cpf) {
 		Optional<Cidadao> aux = this.cidadaoRepository.findByCpf(cpf);
-		aux.get().getEstadoVacinacao();
-		return null;
+		return aux.get().getEstadoVacinacao();
 	}
 
 	@Override
