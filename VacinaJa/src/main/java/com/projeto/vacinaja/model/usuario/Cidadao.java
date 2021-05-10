@@ -51,9 +51,7 @@ public class Cidadao extends Usuario {
 	
 	public void fazerLogin(String CPF) {  
 	}
-	
-	/*US-16 - Notificar os usuarios com msgm SMS quando estiverem habilitados;*/
-		
+
 	/*US-17*/public String agendarVacinacao() {
 		String confirmacaoAgendamento = "";
 		return confirmacaoAgendamento;
