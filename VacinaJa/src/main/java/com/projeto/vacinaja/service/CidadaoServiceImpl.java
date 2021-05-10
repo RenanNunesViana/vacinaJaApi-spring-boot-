@@ -35,7 +35,8 @@ public class CidadaoServiceImpl implements CidadaoService{
 
 	@Override
 	public EstadoVacinacao consultarEstagioVacinacao(String cpf) {
-		// TODO Auto-generated method stub
+		Optional<Cidadao> aux = this.cidadaoRepository.findByCpf(cpf);
+		aux.get().getEstadoVacinacao();
 		return null;
 	}
 

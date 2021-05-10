@@ -19,6 +19,10 @@ public class Cidadao extends Usuario {
 		return this.cpf;
 	}
 	
+	public EstadoVacinacao getEstadoVacinacao() {
+		return this.estadoVacinacao;
+	}
+	
 	/*US-14*/
 	public void alteraNomeCompleto(String novoNome) {
 		super.nomeCompleto = novoNome;
@@ -47,11 +51,7 @@ public class Cidadao extends Usuario {
 	
 	public void fazerLogin(String CPF) {  
 	}
-
-	/*US-15*/public EstadoVacinacao consultarMeuEstagioVacinacao() {
-		return this.estadoVacinacao;
-	}
-		
+	
 	/*US-16 - Notificar os usuarios com msgm SMS quando estiverem habilitados;*/
 		
 	/*US-17*/public String agendarVacinacao() {
