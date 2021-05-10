@@ -13,12 +13,18 @@ public class Notificador {
 	}
 	
 	public void notificarTodos() {
-
+		for(Notificavel notificavel: cidadaosNotificaveis) {
+			notificavel.notifica();
+		}
 	}
 
-	public void notificaCidadao(String cpfCidadao) {
-		// adicionar contexto da notificacao?
-//		cidadaosNotificaveis.get().notifica();
+	public void notificarCidadaoEspecifico(String cpf) {
+		for(Notificavel notificavel: cidadaosNotificaveis) {
+			Cidadao temp = (Cidadao) notificavel;
+			if(temp.getCpf().equals(cpf)){
+				temp.notifica();
+			}
+		}
 	}
 	
 	public void adicionaNotificavel(Cidadao cidadao) {
