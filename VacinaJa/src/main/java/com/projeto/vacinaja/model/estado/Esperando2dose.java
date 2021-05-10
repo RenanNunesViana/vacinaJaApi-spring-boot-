@@ -9,7 +9,9 @@ public class Esperando2dose extends EstadoVacinacao{
 	}
 
 	public void atualizar() {
-		
+		// WIP
+		if(this.cidadao.getDataVacinacao() >= diasNecessarios2dose)
+			this.cidadao.alterarEstadoVacinacao(new Habilitado2dose(this.cidadao));	
 	}
 	
 	public void tomarVacina() {

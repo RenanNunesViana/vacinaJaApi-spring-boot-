@@ -2,10 +2,12 @@ package com.projeto.vacinaja.model.usuario;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+
+import com.projeto.vacinaja.model.Notificavel;
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 
 @Entity
-public class Cidadao extends Usuario {
+public class Cidadao extends Usuario implements Notificavel{
 	
 	public String numeroSUS;
 	public String email;
@@ -15,14 +17,9 @@ public class Cidadao extends Usuario {
 	@OneToOne
 	public EstadoVacinacao estadoVacinacao;
 	
-	public String getCPF() {
-		return this.cpf;
+	public void alterarEstadoVacinacao(EstadoVacinacao novoEstadoVacinacao) {
+		this.estadoVacinacao = novoEstadoVacinacao;
 	}
-	
-	public EstadoVacinacao getEstadoVacinacao() {
-		return this.estadoVacinacao;
-	}
-	
 	/*US-14*/
 	public void alteraNomeCompleto(String novoNome) {
 		super.nomeCompleto = novoNome;
@@ -52,8 +49,36 @@ public class Cidadao extends Usuario {
 	public void fazerLogin(String CPF) {  
 	}
 
+	
+//	/*US-15*/public EstadoVacinacao consultarMeuEstagioVacinacao() {
+//		return this.estadoVacinacao;
+//	}
+		
+	/*US-16 - Notificar os usuarios com msgm SMS quando estiverem habilitados;*/
+		
+	public String getNumeroSUS() {
+		return numeroSUS;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public String getProfissao() {
+		return profissao;
+	}
+	public String getComorbidades() {
+		return comorbidades;
+	}
+	public EstadoVacinacao getEstadoVacinacao() {
+		return estadoVacinacao;
+	}
 	/*US-17*/public String agendarVacinacao() {
 		String confirmacaoAgendamento = "";
 		return confirmacaoAgendamento;
+	}
+	@Override
+	public void notifica() {
+		// TODO Auto-generated method stub
+		this.estadoVacinacao.atualizar();
+		
 	}
 }
