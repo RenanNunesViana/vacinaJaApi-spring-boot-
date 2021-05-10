@@ -12,7 +12,6 @@ public abstract class Usuario {
 	@Id
 	@GeneratedValue
 	public Long id;
-	
 	public String nomeCompleto;
 	public String endereco;
 	public String cpf;
@@ -68,6 +67,5 @@ public abstract class Usuario {
 	public String getComorbidade() {
 		return comorbidade;
 	}
-	
 	
 }
