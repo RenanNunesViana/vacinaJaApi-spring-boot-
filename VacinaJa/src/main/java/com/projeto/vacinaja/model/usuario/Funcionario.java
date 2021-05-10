@@ -2,11 +2,18 @@ package com.projeto.vacinaja.model.usuario;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import com.projeto.vacinaja.model.vacina.Vacina;
 
+@Entity
 public class Funcionario implements Usuario {
 	
-	public String id;
+	@Id
+	@GeneratedValue
+	public Long id;
 	public String cargo;
 	public String cpf;
 	public String localTrabalho;
@@ -35,7 +42,7 @@ public class Funcionario implements Usuario {
 	}
 	
 	/*US-11*/public void registrarVacinacaoDeCidadao(String cpf,String dataVacinacao,int loteVacina,
-			TipoVacina tipo,int numeroDose) {
+			Vacina tipo,int numeroDose) {
 	}
 
 	@Override

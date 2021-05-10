@@ -1,8 +1,18 @@
 package com.projeto.vacinaja.model.usuario;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import com.projeto.vacinaja.model.estado.EstadoVacinacao;
+
+@Entity
 public class Cidadao implements Usuario {
 	
-	public String id;
+	@Id
+	@GeneratedValue
+	public Long id;
+	
 	public String nomeCompleto;
 	public String endereco;
 	public String cpf;
@@ -11,7 +21,7 @@ public class Cidadao implements Usuario {
 	public String dataNascimento;
 	public String telefone;
 	public String profissao;
-	//public EstadoVacinacao estadoVacinacao;
+	public EstadoVacinacao estadoVacinacao;
 	public String comorbidade;
 	
 	/*US-14*/
