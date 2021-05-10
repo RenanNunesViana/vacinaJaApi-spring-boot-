@@ -2,7 +2,6 @@ package com.projeto.vacinaja.model.usuario;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 
 @Entity
@@ -15,6 +14,14 @@ public class Cidadao extends Usuario {
 	
 	@OneToOne
 	public EstadoVacinacao estadoVacinacao;
+	
+	public String getCPF() {
+		return this.cpf;
+	}
+	
+	public EstadoVacinacao getEstadoVacinacao() {
+		return this.estadoVacinacao;
+	}
 	
 	/*US-14*/
 	public void alteraNomeCompleto(String novoNome) {
@@ -45,12 +52,6 @@ public class Cidadao extends Usuario {
 	public void fazerLogin(String CPF) {  
 	}
 
-//	/*US-15*/public EstadoVacinacao consultarMeuEstagioVacinacao() {
-//		return this.estadoVacinacao;
-//	}
-		
-	/*US-16 - Notificar os usuarios com msgm SMS quando estiverem habilitados;*/
-		
 	/*US-17*/public String agendarVacinacao() {
 		String confirmacaoAgendamento = "";
 		return confirmacaoAgendamento;
