@@ -10,6 +10,6 @@ public interface VacinaService {
     public void salvarVacina(Vacina vacina);
     public void removerVacina(String idVacina);
     public List <Vacina> listarVacinas();
-    public Optional<Vacina> pegarVacina(String idVacina);
+    public Optional<Vacina> consultarVacinaPorId(String idVacina);
 
 }

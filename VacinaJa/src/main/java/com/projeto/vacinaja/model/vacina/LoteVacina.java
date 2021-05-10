@@ -18,13 +18,19 @@ public class LoteVacina {
     @OneToOne
     private Vacina vacina;
     private int doses;
-    private Date dataDeValidade;
+    private String dataDeValidade;
 
     public LoteVacina(){
         this.numeroLote = 0;
     }
 
-    public LoteVacina(long numeroLote, Vacina vacina, int doses, Date dataDeValidade) {
+    public LoteVacina(Vacina vacina, int doses, String dataDeValidade) {
+        this.vacina = vacina;
+        this.doses = doses;
+        this.dataDeValidade = dataDeValidade;
+    }
+
+    public LoteVacina(long numeroLote, Vacina vacina, int doses, String dataDeValidade) {
         this.numeroLote = numeroLote;
         this.vacina = vacina;
         this.doses = doses;
@@ -55,11 +61,11 @@ public class LoteVacina {
         this.doses = doses;
     }
 
-    public Date getDataDeValidade() {
+    public String getDataDeValidade() {
         return dataDeValidade;
     }
 
-    public void setDataDeValidade(Date dataDeValidade) {
+    public void setDataDeValidade(String dataDeValidade) {
         this.dataDeValidade = dataDeValidade;
     }
 

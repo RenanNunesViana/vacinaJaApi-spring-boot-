@@ -31,7 +31,7 @@ public class VacinaServiceImpl implements VacinaService{
     }
 
     @Override
-    public Optional<Vacina> pegarVacina(String idVacina) {
+    public Optional<Vacina> consultarVacinaPorId(String idVacina) {
         return this.vacinaRepository.findById(idVacina);
     }
 }
