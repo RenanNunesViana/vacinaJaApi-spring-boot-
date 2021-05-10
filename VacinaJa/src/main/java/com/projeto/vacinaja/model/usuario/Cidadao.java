@@ -23,7 +23,7 @@ public class Cidadao extends Usuario {
 	public void alteraEndereco(String novoEndereco) { 
 		this.endereco = novoEndereco;
 	}
-	public void alteraCPF(String novoCPF) { 
+	public void alteraCPF(Long novoCPF) { 
 		this.cpf = novoCPF;
 	}
 	public void alteraNumeroSUS(String novoNumeroSUS) { 
