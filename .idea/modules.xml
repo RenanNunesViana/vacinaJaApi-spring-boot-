@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/VacinaJa/VacinaJa.iml" filepath="$PROJECT_DIR$/VacinaJa/VacinaJa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vacine-ja-grupo-04-psoft-2020-1e.iml" filepath="$PROJECT_DIR$/.idea/vacine-ja-grupo-04-psoft-2020-1e.iml" />
+    </modules>
+  </component>
+</project>

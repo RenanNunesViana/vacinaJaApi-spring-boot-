@@ -1,0 +1,23 @@
+package com.projeto.vacinaja.model.estado;
+
+import com.projeto.vacinaja.model.usuario.Cidadao;
+
+public class Habilitado1Dose extends EstadoVacinacao{
+
+	public Habilitado1Dose(Cidadao cidadao) {
+		super(cidadao);
+	}
+
+	public void atualizar() {
+		
+	}
+	
+	public void tomarVacina() {
+		
+	}
+	
+	@Override
+	public String toString() {
+		return "apto para tomar primeira dose da vacina";
+	}
+}
