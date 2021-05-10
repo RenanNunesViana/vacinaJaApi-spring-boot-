@@ -1,32 +1,24 @@
 package com.projeto.vacinaja.model.usuario;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 
 @Entity
-public class Cidadao implements Usuario {
+public class Cidadao extends Usuario {
 	
-	@Id
-	@GeneratedValue
-	public Long id;
-	
-	public String nomeCompleto;
-	public String endereco;
-	public String cpf;
 	public String numeroSUS;
 	public String email;
-	public String dataNascimento;
-	public String telefone;
 	public String profissao;
+	public String comorbidades;
+	
+	@OneToOne
 	public EstadoVacinacao estadoVacinacao;
-	public String comorbidade;
 	
 	/*US-14*/
 	public void alteraNomeCompleto(String novoNome) {
-		this.nomeCompleto = novoNome;
+		super.nomeCompleto = novoNome;
 	}
 	public void alteraEndereco(String novoEndereco) { 
 		this.endereco = novoEndereco;
