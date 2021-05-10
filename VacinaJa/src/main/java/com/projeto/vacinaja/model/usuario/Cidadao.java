@@ -2,7 +2,6 @@ package com.projeto.vacinaja.model.usuario;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 
 @Entity
@@ -15,6 +14,10 @@ public class Cidadao extends Usuario {
 	
 	@OneToOne
 	public EstadoVacinacao estadoVacinacao;
+	
+	public String getCPF() {
+		return this.cpf;
+	}
 	
 	/*US-14*/
 	public void alteraNomeCompleto(String novoNome) {
