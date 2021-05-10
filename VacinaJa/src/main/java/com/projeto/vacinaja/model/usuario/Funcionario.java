@@ -2,25 +2,30 @@ package com.projeto.vacinaja.model.usuario;
 
 import java.util.ArrayList;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
+import javax.persistence.Entity;
+
+import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 import com.projeto.vacinaja.model.vacina.Vacina;
 
 @Entity
-public class Funcionario implements Usuario {
+public class Funcionario extends Usuario {
 	
-	@Id
-	@GeneratedValue
-	public Long id;
 	public String cargo;
-	public String cpf;
 	public String localTrabalho;
 	
 	public Funcionario() {
 	}
 	
+	public Funcionario(Long id, String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
+			String telefone, EstadoVacinacao estadoVacinacao, String comorbidade, String cargo, String localTrabalho) {
+		super(id, nomeCompleto, endereco, cpf, email, dataNascimento, telefone, estadoVacinacao, comorbidade);
+		this.cargo = cargo;
+		this.localTrabalho = localTrabalho;
+	}
+
+
+
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
@@ -43,10 +48,5 @@ public class Funcionario implements Usuario {
 	
 	/*US-11*/public void registrarVacinacaoDeCidadao(String cpf,String dataVacinacao,int loteVacina,
 			Vacina tipo,int numeroDose) {
-	}
-
-	@Override
-	public void fazerLogin(String CPF) {
-		// TODO Auto-generated method stub
 	}
 }
