@@ -1,5 +1,6 @@
 package com.projeto.vacinaja.controller;
 
+import com.projeto.vacinaja.model.estado.NaoHabilitado1Dose;
 import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.service.CidadaoService;
 
@@ -29,6 +30,7 @@ public class CidadaoApiController {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cidadao.getCpf());
         // checa se ja existe
+        cidadao.alterarEstadoVacinacao(new NaoHabilitado1Dose(cidadao));
         cidadaoService.salvarCidadao(cidadao);
         return new ResponseEntity<String>("Cidadão cadastrado", HttpStatus.CREATED);
     }
