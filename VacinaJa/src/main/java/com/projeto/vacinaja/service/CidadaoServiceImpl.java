@@ -3,10 +3,14 @@ package com.projeto.vacinaja.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.repository.CidadaoRepository;
 
+@Service
 public class CidadaoServiceImpl implements CidadaoService{
 	
 	@Autowired
@@ -21,7 +25,6 @@ public class CidadaoServiceImpl implements CidadaoService{
     public void removerCidadao(String cpf) {
     	Optional<Cidadao> aux = this.cidadaoRepository.findByCpf(cpf);
         this.cidadaoRepository.delete(aux.get());
-        
     }
 
     @Override

@@ -22,5 +22,4 @@ public abstract class EstadoVacinacao {
 	}
 	
 	public abstract void atualizar();
-	public abstract void tomarVacina();
 }

@@ -35,4 +35,36 @@ public abstract class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
 	}
+  
+	public Long getId() {
+		return id;
+	}
+
+	public String getNomeCompleto() {
+		return nomeCompleto;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public String getComorbidade() {
+		return comorbidade;
+	}
 }

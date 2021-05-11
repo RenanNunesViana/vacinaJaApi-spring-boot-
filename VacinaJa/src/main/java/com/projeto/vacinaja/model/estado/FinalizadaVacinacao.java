@@ -11,10 +11,6 @@ public class FinalizadaVacinacao extends EstadoVacinacao{
 	public void atualizar() {
 		
 	}
-	
-	public void tomarVacina() {
-		
-	}
 
 	@Override
 	public String toString() {
