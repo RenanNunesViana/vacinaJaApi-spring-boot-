@@ -14,9 +14,6 @@ public class Esperando2dose extends EstadoVacinacao{
 			this.cidadao.alterarEstadoVacinacao(new Habilitado2dose(this.cidadao));	
 	}
 	
-	public void tomarVacina() {
-		
-	}
 	
 	@Override
 	public String toString() {
