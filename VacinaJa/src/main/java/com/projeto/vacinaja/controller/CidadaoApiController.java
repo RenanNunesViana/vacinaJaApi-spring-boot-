@@ -1,6 +1,9 @@
 package com.projeto.vacinaja.controller;
 
+import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.service.CidadaoService;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +34,7 @@ public class CidadaoApiController {
     }
 
     @RequestMapping(value = "cidadao/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> atualizarCadastro(@PathVariable("id")long cpf, @RequestBody Cidado cidadao) {
+    public ResponseEntity<?> atualizarCadastro(@PathVariable("id")String cpf, @RequestBody Cidadao cidadao) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         // checa existencia de cidadao
@@ -47,7 +50,7 @@ public class CidadaoApiController {
     }
 	
     @RequestMapping(value = "cidadao/{id}/estadovacinacao", method= RequestMethod.GET)
-    public ResponseEntity<?> checarEstadoVacinacao(@PathVariable("id")long cpf) {
+    public ResponseEntity<?> checarEstadoVacinacao(@PathVariable("id")String cpf) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         // checa existencia de cidadao
@@ -56,7 +59,7 @@ public class CidadaoApiController {
     }
 
     @RequestMapping(value = "cidadao/{id}/agendamento", method = RequestMethod.PUT)
-    public ResponseEntity<?> agendarVacinacao(@PathVariable("id")long cpf) {
+    public ResponseEntity<?> agendarVacinacao(@PathVariable("id")String cpf) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         // checa existencia de cidadao
@@ -64,5 +67,6 @@ public class CidadaoApiController {
         // implementar Service de Agendamento
         // String agendamento = agendamentoService.agendar(currentCidadao.getEstadoVacinacao());
         // return new ResponseEntity<String>(agendamento, HttpStatus.OK);
+        return null;
     }
 }
