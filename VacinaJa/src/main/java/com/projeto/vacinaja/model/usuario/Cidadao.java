@@ -46,16 +46,9 @@ public class Cidadao extends Usuario implements Notificavel{
 		this.profissao = novaProfissao;
 	}
 	
-	public void fazerLogin(String CPF) {  
-	}
+	// public void fazerLogin(String CPF) {  
+	// }
 
-	
-//	/*US-15*/public EstadoVacinacao consultarMeuEstagioVacinacao() {
-//		return this.estadoVacinacao;
-//	}
-		
-	/*US-16 - Notificar os usuarios com msgm SMS quando estiverem habilitados;*/
-		
 	public String getNumeroSUS() {
 		return numeroSUS;
 	}
@@ -71,10 +64,12 @@ public class Cidadao extends Usuario implements Notificavel{
 	public EstadoVacinacao getEstadoVacinacao() {
 		return estadoVacinacao;
 	}
-	/*US-17*/public String agendarVacinacao() {
-		String confirmacaoAgendamento = "";
-		return confirmacaoAgendamento;
-	}
+
+	// /*US-17*/public String agendarVacinacao() {
+	// 	String confirmacaoAgendamento = "";
+	// 	return confirmacaoAgendamento;
+	// }
+
 	@Override
 	public void notifica() {
 		// TODO Auto-generated method stub
