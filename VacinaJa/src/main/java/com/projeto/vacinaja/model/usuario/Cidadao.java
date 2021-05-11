@@ -23,7 +23,7 @@ public class Cidadao extends Usuario {
 	public void alteraEndereco(String novoEndereco) { 
 		this.endereco = novoEndereco;
 	}
-	public void alteraCPF(Long novoCPF) { 
+	public void alteraCPF(String novoCPF) { 
 		this.cpf = novoCPF;
 	}
 	public void alteraNumeroSUS(String novoNumeroSUS) { 
@@ -44,10 +44,11 @@ public class Cidadao extends Usuario {
 	
 	public void fazerLogin(String CPF) {  
 	}
+	
 
-//	/*US-15*/public EstadoVacinacao consultarMeuEstagioVacinacao() {
-//		return this.estadoVacinacao;
-//	}
+	/*US-15*/public EstadoVacinacao consultarMeuEstagioVacinacao() {
+		return this.estadoVacinacao;
+	}
 		
 	/*US-16 - Notificar os usuarios com msgm SMS quando estiverem habilitados;*/
 		

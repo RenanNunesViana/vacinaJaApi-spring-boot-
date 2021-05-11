@@ -18,10 +18,6 @@ public interface FuncionarioService {
 
 	public void removerFuncionario(Long id);
 
-	public void cadastrarLoteDeVacina(String validade, int numeroDoses, String tipo);
-
-	public ArrayList<Vacina> listarDoses(ArrayList<Vacina> vacinas);
-
 	public void habilitarCidadaoParaVacinacao(ArrayList<Cidadao> listaCidadaos, int dosesDisponiveis, String perfil);
 
 	public void registrarVacinacaoDeCidadao(String cpf, String dataVacinacao, int loteVacina, Vacina tipo,

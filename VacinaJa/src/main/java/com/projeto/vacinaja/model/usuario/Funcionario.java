@@ -3,7 +3,6 @@ package com.projeto.vacinaja.model.usuario;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
-
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 import com.projeto.vacinaja.model.vacina.Vacina;
 
@@ -16,14 +15,14 @@ public class Funcionario extends Usuario {
 	public Funcionario() {
 	}
 
-	public Funcionario(Long id, String nomeCompleto, String endereco, Long cpf, String email, String dataNascimento,
+	public Funcionario(Long id, String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
 			String telefone, EstadoVacinacao estadoVacinacao, String comorbidade, String cargo, String localTrabalho) {
 		super(id, nomeCompleto, endereco, cpf, email, dataNascimento, telefone, estadoVacinacao, comorbidade);
 		this.cargo = cargo;
 		this.localTrabalho = localTrabalho;
 	}
 
-	public Long getCpf() {
+	public String getCpf() {
 		return this.cpf;
 	}
 

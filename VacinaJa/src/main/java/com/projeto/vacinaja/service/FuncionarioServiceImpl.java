@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.model.usuario.Funcionario;
 import com.projeto.vacinaja.model.vacina.Vacina;
+import com.projeto.vacinaja.repository.CidadaoRepository;
 import com.projeto.vacinaja.repository.FuncionarioRepository;
 
 public class FuncionarioServiceImpl implements FuncionarioService {
@@ -20,9 +21,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 	@Override
 	public void cadastrarFuncionario(Funcionario funcionario) {
-		if (cidadaoRepository.findById(funcionario.getCpf()) != null) {
+		//if (cidadaoRepository.findByCpf(funcionario.getCpf()) != null) {
 			funcionarioRepository.save(funcionario);
-		}
+		//}
 
 	}
 
@@ -42,17 +43,14 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		this.funcionarioRepository.delete(aux);
 	}
 
-	
 	@Override
 	public void habilitarCidadaoParaVacinacao(ArrayList<Cidadao> listaCidadaos, int dosesDisponiveis, String perfil) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void registrarVacinacaoDeCidadao(String cpf, String dataVacinacao, int loteVacina, Vacina tipo,
 			int numeroDose) {
-		// TODO Auto-generated method stub
 
 	}
 

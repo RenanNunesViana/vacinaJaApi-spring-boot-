@@ -12,10 +12,9 @@ public abstract class Usuario {
 	@Id
 	@GeneratedValue
 	public Long id;
-	
 	public String nomeCompleto;
 	public String endereco;
-	public Long cpf;
+	public String cpf;
 	public String email;
 	public String dataNascimento;
 	public String telefone;
@@ -25,7 +24,7 @@ public abstract class Usuario {
 		
 	}
 	
-	public Usuario(Long id, String nomeCompleto, String endereco, Long cpf, String email, String dataNascimento,
+	public Usuario(Long id, String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
 			String telefone, EstadoVacinacao estadoVacinacao, String comorbidade) {
 		super();
 		this.id = id;
@@ -36,6 +35,4 @@ public abstract class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
 	}
-	
-	
 }
