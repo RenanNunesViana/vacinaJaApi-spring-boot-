@@ -35,7 +35,7 @@ public abstract class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
 	}
-
+  
 	public Long getId() {
 		return id;
 	}
@@ -67,5 +67,4 @@ public abstract class Usuario {
 	public String getComorbidade() {
 		return comorbidade;
 	}
-	
 }

@@ -3,6 +3,7 @@ package com.projeto.vacinaja.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
@@ -39,7 +40,7 @@ public class CidadaoServiceImpl implements CidadaoService{
 	@Override
 	public EstadoVacinacao consultarEstagioVacinacao(String cpf) {
 		Optional<Cidadao> aux = this.cidadaoRepository.findByCpf(cpf);
-		return aux.get().getEstadoVacinacao();
+		return aux.get().estadoVacinacao;
 	}
 
 	@Override
