@@ -3,6 +3,7 @@ package com.projeto.vacinaja.controller;
 import com.projeto.vacinaja.model.estado.NaoHabilitado1Dose;
 import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.service.CidadaoService;
+import com.projeto.vacinaja.util.CidadaoErro;
 
 import java.util.Optional;
 
@@ -29,7 +30,9 @@ public class CidadaoApiController {
     public ResponseEntity<?> cadastrarCidadao(@RequestBody Cidadao cidadao, UriComponentsBuilder uciBuilder) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cidadao.getCpf());
-        // checa se ja existe
+        if(optional.isPresent()) {
+            return CidadaoErro.erroCidadaoJaCadastrado();
+        }
         cidadao.alterarEstadoVacinacao(new NaoHabilitado1Dose(cidadao));
         cidadaoService.salvarCidadao(cidadao);
         return new ResponseEntity<String>("Cidadão cadastrado", HttpStatus.CREATED);
@@ -39,7 +42,9 @@ public class CidadaoApiController {
     public ResponseEntity<?> atualizarCadastro(@PathVariable("id")String cpf, @RequestBody Cidadao cidadao) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
-        // checa existencia de cidadao
+         if(!optional.isPresent()) {
+            return CidadaoErro.erroCidadaoNaoEncontrado();
+        }
         Cidadao tempCidadao = optionalCidadao.get();
         tempCidadao.alteraNomeCompleto(cidadao.getNomeCompleto());
         tempCidadao.alteraEndereco(cidadao.getEndereco());
@@ -55,8 +60,9 @@ public class CidadaoApiController {
     public ResponseEntity<?> checarEstadoVacinacao(@PathVariable("id")String cpf) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
-        // checa existencia de cidadao
-
+        if(!optional.isPresent()) {
+            return CidadaoErro.erroCidadaoNaoEncontrado();
+        }
         return new ResponseEntity<String>(optionalCidadao.get().getEstadoVacinacao().toString(), HttpStatus.OK);
     }
 
@@ -64,7 +70,9 @@ public class CidadaoApiController {
     public ResponseEntity<?> agendarVacinacao(@PathVariable("id")String cpf) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
-        // checa existencia de cidadao
+        if(!optional.isPresent()) {
+            return CidadaoErro.erroCidadaoNaoEncontrado();
+        }
         Cidadao currentCidadao = optionalCidadao.get();
         // implementar Service de Agendamento
         // String agendamento = agendamentoService.agendar(currentCidadao.getEstadoVacinacao());
