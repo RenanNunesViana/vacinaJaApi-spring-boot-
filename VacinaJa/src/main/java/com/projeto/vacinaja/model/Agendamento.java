@@ -11,20 +11,24 @@ public class Agendamento {
     @GeneratedValue
     long iD;
 
-    private long cpf;
+    private String cpf;
 
     private int dose;
 
-    private boolean done;
     
     private String data;
     
     public Agendamento() {}
 
-    public Agendamento(long iD, long cpf, int dose, boolean done, String data) {
+    public Agendamento(String cpf, int dose, String data) {
+        this.cpf = cpf;
+        this.data = data;
+        this.dose = dose;
+    }
+    
+    public Agendamento(long iD, String cpf, int dose, String data) {
         this.iD = iD;
         this.cpf = cpf;
-        this.done = done;
         this.data = data;
         this.dose = dose;
     }
@@ -37,11 +41,11 @@ public class Agendamento {
 		this.iD = iD;
 	}
 
-	public long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -51,14 +55,6 @@ public class Agendamento {
 
 	public void setDose(int dose) {
 		this.dose = dose;
-	}
-
-	public boolean isDone() {
-		return done;
-	}
-
-	public void setDone(boolean done) {
-		this.done = done;
 	}
 
 	public String getData() {

@@ -27,7 +27,7 @@ public class LoteVacinaServiceImpl implements LoteVacinaService{
     }
 
     @Override
-    public List<LoteVacina> consultarLotePorVacina(Vacina vacina) {
+    public Optional<LoteVacina> consultarLotePorVacina(Vacina vacina) {
         return this.loteVacinaRepository.findByVacina(vacina);
     }
 
