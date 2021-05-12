@@ -5,6 +5,7 @@ import javax.persistence.OneToOne;
 
 import com.projeto.vacinaja.model.Notificavel;
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
+import com.projeto.vacinaja.model.vacina.CarteiraVacinacao;
 
 @Entity
 public class Cidadao extends Usuario implements Notificavel{
@@ -16,7 +17,11 @@ public class Cidadao extends Usuario implements Notificavel{
 	
 	@OneToOne
 	public EstadoVacinacao estadoVacinacao;
-	
+
+	@OneToOne
+	private CarteiraVacinacao carteiraVacinacao;
+
+
 	public void alterarEstadoVacinacao(EstadoVacinacao novoEstadoVacinacao) {
 		this.estadoVacinacao = novoEstadoVacinacao;
 	}
@@ -63,6 +68,10 @@ public class Cidadao extends Usuario implements Notificavel{
 	}
 	public EstadoVacinacao getEstadoVacinacao() {
 		return estadoVacinacao;
+	}
+
+	public CarteiraVacinacao getCarteriaVacinacao() {
+		return carteiraVacinacao;
 	}
 
 	// /*US-17*/public String agendarVacinacao() {
