@@ -5,6 +5,7 @@ import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 import com.projeto.vacinaja.model.vacina.CarteiraVacinacao;
 import com.sun.istack.NotNull;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,17 +22,21 @@ public class Cidadao extends Usuario implements Notificavel{
 	@NotNull
 	private EstadoVacinacao estadoVacinacao;
 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
 	private CarteiraVacinacao carteiraVacinacao;
-
+ 
+	public Cidadao() {
+		
+	}
+	
 	public Cidadao(String nome, String endereco, String cpf, String email, String dataNascimento, String telefone,
 				String numeroSUS, String profissao) {
 				
-		super(nome, endereco, cpf, email, dataNascimento, telefone, EstadoVacinacao.NAO_HABILITADO , "");
+		super(nome, endereco, cpf, email, dataNascimento, telefone, "");
 		this.numeroSUS = numeroSUS;
 		this.profissao = profissao;
 		this.carteiraVacinacao = new CarteiraVacinacao();
-
+		this.estadoVacinacao = EstadoVacinacao.NAO_HABILITADO;
 	}
 
 	public void alterarEstadoVacinacao(EstadoVacinacao novoEstadoVacinacao) {

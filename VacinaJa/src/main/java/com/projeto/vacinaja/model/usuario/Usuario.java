@@ -24,7 +24,7 @@ public abstract class Usuario {
 	}
 	
 	public Usuario(String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
-			String telefone, EstadoVacinacao estadoVacinacao, String comorbidade) {
+			String telefone, String comorbidade) {
 		super();
 		this.nomeCompleto = nomeCompleto;
 		this.endereco = endereco;
