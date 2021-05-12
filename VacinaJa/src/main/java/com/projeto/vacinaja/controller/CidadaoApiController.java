@@ -1,10 +1,14 @@
 package com.projeto.vacinaja.controller;
 
-import com.projeto.vacinaja.model.estado.NaoHabilitado1Dose;
+import com.projeto.vacinaja.model.Agendamento;
+import com.projeto.vacinaja.model.estado.*;
 import com.projeto.vacinaja.model.usuario.Cidadao;
+import com.projeto.vacinaja.model.vacina.LoteVacina;
+import com.projeto.vacinaja.model.vacina.Vacina;
 import com.projeto.vacinaja.service.AgendamentoService;
 import com.projeto.vacinaja.service.CidadaoService;
 import com.projeto.vacinaja.service.LoteVacinaService;
+import com.projeto.vacinaja.service.VacinaService;
 import com.projeto.vacinaja.util.CidadaoErro;
 
 import java.util.Optional;
@@ -33,6 +37,9 @@ public class CidadaoApiController {
 
     @Autowired
     LoteVacinaService loteVacinaService;
+
+    @Autowired
+    VacinaService vacinaService;
 
     @RequestMapping(value = "/cidadao/", method=RequestMethod.POST)
     public ResponseEntity<?> cadastrarCidadao(@RequestBody Cidadao cidadao, UriComponentsBuilder uciBuilder) {
@@ -82,10 +89,13 @@ public class CidadaoApiController {
             return CidadaoErro.erroCidadaoNaoEncontrado();
         }
         Cidadao currentCidadao = optionalCidadao.get();
-        // loteVacinaService.consultarLotePorVacina();
-        // implementar Service de Agendamento
-        // String agendamento = agendamentoService.agendar(currentCidadao.getEstadoVacinacao());
-        // return new ResponseEntity<String>(agendamento, HttpStatus.OK);
-        return null;
+        Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(currentCidadao.getCarteriaVacinacao().getNomeVacina());
+        Optional<LoteVacina> optionalLote = loteVacinaService.consultarLotePorVacina(optionalVacina.get());
+        boolean habilitado = (currentCidadao.getEstadoVacinacao() instanceof Habilitado2dose) || (currentCidadao.getEstadoVacinacao() instanceof Habilitado1Dose);
+        int dose = (currentCidadao.getEstadoVacinacao() instanceof Habilitado1Dose ? 1 : 2);
+        if(optionalLote.get().getDoses() >= 0 && habilitado) {
+            agendamentoService.cadastrarAgendamento(new Agendamento(cpf, dose, "05/05/2022-14:00"));
+        }
+        return new ResponseEntity<String>("Agendamento realizado com sucesso", HttpStatus.OK);
     }
 }

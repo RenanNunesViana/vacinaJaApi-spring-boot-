@@ -53,9 +53,9 @@ public class LoteVacinaApiController {
 		Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(id);
 		// if(!optionalVacina.isPresent())
 		// return ErroVacina.vacinaNaoCadastrada();
-		List<LoteVacina> lotes = loteVacinaService.consultarLotePorVacina(optionalVacina.get());
+		Optional<LoteVacina> optionalLote = loteVacinaService.consultarLotePorVacina(optionalVacina.get());
 		// if(lotes.isEmpty())
 		// return ErroLote.loteVazio();
-		return new ResponseEntity<List<LoteVacina>>(lotes, HttpStatus.OK);
+		return new ResponseEntity<LoteVacina>(optionalLote.get(), HttpStatus.OK);
 	}
 }

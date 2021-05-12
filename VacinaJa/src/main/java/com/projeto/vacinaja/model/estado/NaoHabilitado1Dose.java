@@ -23,9 +23,4 @@ public class NaoHabilitado1Dose extends EstadoVacinacao{
 		return "Habilitado para tomar primeira dose da vacina";
 	}
 
-	@Override
-	public void tomarVacina() {
-		// TODO Auto-generated method stub
-		
-	}
 }
