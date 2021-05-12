@@ -21,7 +21,6 @@ public abstract class Usuario {
 	public String comorbidade;
 	
 	public Usuario() {
-		
 	}
 	
 	public Usuario(Long id, String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
