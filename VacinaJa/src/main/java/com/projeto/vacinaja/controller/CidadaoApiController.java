@@ -60,7 +60,7 @@ public class CidadaoApiController {
     public ResponseEntity<?> checarEstadoVacinacao(@PathVariable("id")String cpf) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
-        if(!optional.isPresent()) {
+        if(!optionalCidadao.isPresent()) {
             return CidadaoErro.erroCidadaoNaoEncontrado();
         }
         return new ResponseEntity<String>(optionalCidadao.get().getEstadoVacinacao().toString(), HttpStatus.OK);
