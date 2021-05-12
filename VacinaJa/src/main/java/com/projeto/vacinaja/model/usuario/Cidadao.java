@@ -1,11 +1,11 @@
 package com.projeto.vacinaja.model.usuario;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-
 import com.projeto.vacinaja.model.Notificavel;
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 import com.projeto.vacinaja.model.vacina.CarteiraVacinacao;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Cidadao extends Usuario implements Notificavel{

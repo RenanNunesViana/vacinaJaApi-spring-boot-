@@ -1,10 +1,10 @@
 package com.projeto.vacinaja.model.usuario;
 
+import com.projeto.vacinaja.model.estado.EstadoVacinacao;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 
 @Entity
 public abstract class Usuario {
@@ -35,7 +35,7 @@ public abstract class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
 	}
-  
+
 	public Long getId() {
 		return id;
 	}
