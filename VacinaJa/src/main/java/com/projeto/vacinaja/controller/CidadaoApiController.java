@@ -36,30 +36,31 @@ public class CidadaoApiController {
     VacinaService vacinaService;
 
     @RequestMapping(value = "/cidadao/", method=RequestMethod.POST)
-    public ResponseEntity<?> cadastrarCidadao(@RequestBody Cidadao cidadao, UriComponentsBuilder uciBuilder) {
+    public ResponseEntity<?> cadastrarDadosCidadao(@RequestBody String cpf, String nome, String endereco, String email, String telefone, String dataDeNascimento,
+                    String numeroSUS, String profissao) {
         // WIP
-        Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cidadao.getCpf());
+        Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         if(optionalCidadao.isPresent()) {
             return CidadaoErro.erroCidadaoJaCadastrado();
         }
-        cidadao.alterarEstadoVacinacao(EstadoVacinacao.NAO_HABILITADO);
-        cidadaoService.salvarCidadao(cidadao);
+        Cidadao novoCidadao = new Cidadao(nome, endereco, cpf, email, dataDeNascimento, telefone, numeroSUS, profissao);
+        cidadaoService.salvarCidadao(novoCidadao);
         return new ResponseEntity<String>("Cidadão cadastrado", HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/cidadao/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> atualizarCadastro(@PathVariable("id")String cpf, @RequestBody Cidadao cidadao) {
+    public ResponseEntity<?> atualizarCadastro(@PathVariable("id")String cpf, @RequestBody String nomeCompleto, String endereco, String email, String telefone, String profissao) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
          if(!optionalCidadao.isPresent()) {
             return CidadaoErro.erroCidadaoNaoEncontrado();
         }
         Cidadao tempCidadao = optionalCidadao.get();
-        tempCidadao.alteraNomeCompleto(cidadao.getNomeCompleto());
-        tempCidadao.alteraEndereco(cidadao.getEndereco());
-        tempCidadao.alteraEmail(cidadao.getEmail());
-        tempCidadao.alteraTelefone(cidadao.getTelefone());
-        tempCidadao.alteraProfissao(cidadao.getProfissao());
+        tempCidadao.alteraNomeCompleto(nomeCompleto);
+        tempCidadao.alteraEndereco(endereco);
+        tempCidadao.alteraEmail(email);
+        tempCidadao.alteraTelefone(telefone);
+        tempCidadao.alteraProfissao(profissao);
         
         cidadaoService.salvarCidadao(tempCidadao);
        return new ResponseEntity<String>("Dados atualizados com sucesso", HttpStatus.OK); 

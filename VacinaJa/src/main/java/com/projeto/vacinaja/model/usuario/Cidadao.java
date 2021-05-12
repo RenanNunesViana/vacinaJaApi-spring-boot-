@@ -15,9 +15,7 @@ import javax.persistence.OneToOne;
 public class Cidadao extends Usuario implements Notificavel{
 	
 	private String numeroSUS;
-	private String email;
 	private String profissao;
-	private String comorbidades;
 	
 	@Enumerated(EnumType.STRING)
 	@NotNull
@@ -26,10 +24,15 @@ public class Cidadao extends Usuario implements Notificavel{
 	@OneToOne
 	private CarteiraVacinacao carteiraVacinacao;
 
-//	public Cidadao(Long id, String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
-//			String telefone, String comorbidade)){
-//		super(id, nomeCompleto, endereco, cpf, email, dataNascimento, telefone, estadoVacinacao, comorbidade)
-//	}
+	public Cidadao(String nome, String endereco, String cpf, String email, String dataNascimento, String telefone,
+				String numeroSUS, String profissao) {
+				
+		super(nome, endereco, cpf, email, dataNascimento, telefone, EstadoVacinacao.NAO_HABILITADO , "");
+		this.numeroSUS = numeroSUS;
+		this.profissao = profissao;
+		this.carteiraVacinacao = new CarteiraVacinacao();
+
+	}
 
 	public void alterarEstadoVacinacao(EstadoVacinacao novoEstadoVacinacao) {
 		this.estadoVacinacao = novoEstadoVacinacao;
@@ -72,9 +75,7 @@ public class Cidadao extends Usuario implements Notificavel{
 	public String getProfissao() {
 		return profissao;
 	}
-	public String getComorbidades() {
-		return comorbidades;
-	}
+	
 	public EstadoVacinacao getEstadoVacinacao() {
 		return estadoVacinacao;
 	}

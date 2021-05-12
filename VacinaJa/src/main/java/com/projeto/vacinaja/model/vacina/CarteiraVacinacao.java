@@ -17,6 +17,10 @@ public class CarteiraVacinacao {
     
     private String nomeVacina;
 
+	public CarteiraVacinacao(){
+		
+	}
+
     public CarteiraVacinacao(long iD, String data1Dose, int numeroDaDose, String nomeVacina) {
         this.iD = iD;
     	this.data1Dose = data1Dose;
