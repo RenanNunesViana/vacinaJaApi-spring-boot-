@@ -2,17 +2,13 @@ package com.projeto.vacinaja.model.estado;
 
 import com.projeto.vacinaja.model.usuario.Cidadao;
 
-public class NaoHabilitado1Dose extends EstadoVacinacao{
+public class NaoHabilitado1Dose implements EstadoInterface{
 
-	public NaoHabilitado1Dose(Cidadao cidadao) {
-		super(cidadao);
-	}
-
-	public void atualizar() {
+	public void proximoEstado(Cidadao cidadao) {
 		// WIP
-		String dataDeNascimento = this.cidadao.getDataNascimento();
-		String comorbidade = this.cidadao.getComorbidade();
-		String profissao = this.cidadao.getProfissao();
+		String dataDeNascimento = cidadao.getDataNascimento();
+		String comorbidade = cidadao.getComorbidade();
+		String profissao = cidadao.getProfissao();
 		// RequerimentosPrimeiraDose rpd = new RequerimentosPrimeiraDose();	
 		// if(rpd.checaRequerimentos(dataDeNascimento, comorbidade, profissao))
 			//this.cidadao.alterarEstadoVacinacao(new Habilitado1Dose(this.cidadao));

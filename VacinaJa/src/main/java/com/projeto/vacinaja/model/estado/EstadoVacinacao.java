@@ -1,25 +1,17 @@
 package com.projeto.vacinaja.model.estado;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
 import com.projeto.vacinaja.model.usuario.Cidadao;
 
-@Entity
-public abstract class EstadoVacinacao {
+public enum EstadoVacinacao {
+	NAO_HABILITADO(new NaoHabilitado1Dose()), HABILITADO_PRIMEIRA_DOSE(new Habilitado1Dose()),
+	ESPERANDO_SEGUNDA_DOSE(new Esperando2dose()), HABILITADO_SEGUNDA_DOSE(new Habilitado2dose()), 
+	VACINACAO_FINALIZADA(new FinalizadaVacinacao());
 
-	@Id
-	@GeneratedValue
-	private Long id;
-	
-	@OneToOne
-	Cidadao cidadao;
-
-	public EstadoVacinacao(Cidadao cidadao) {
-		this.cidadao = cidadao;
+	private EstadoInterface estadoInterface;
+	private EstadoVacinacao(EstadoInterface estadoInterface) {
+		this.estadoInterface = estadoInterface;
 	}
-	
-	public abstract void atualizar();
+	public void proximoEstado(Cidadao cidadao) {
+		this.estadoInterface.proximoEstado(cidadao);
+	}
 }
