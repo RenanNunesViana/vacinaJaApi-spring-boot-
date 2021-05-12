@@ -14,8 +14,8 @@ public class NaoHabilitado1Dose extends EstadoVacinacao{
 		String comorbidade = this.cidadao.getComorbidade();
 		String profissao = this.cidadao.getProfissao();
 		// RequerimentosPrimeiraDose rpd = new RequerimentosPrimeiraDose();	
-		if(rpd.checaRequerimentos(dataDeNascimento, comorbidade, profissao))
-			this.cidadao.alterarEstadoVacinacao(new Habilitado1Dose(this.cidadao));
+		// if(rpd.checaRequerimentos(dataDeNascimento, comorbidade, profissao))
+			//this.cidadao.alterarEstadoVacinacao(new Habilitado1Dose(this.cidadao));
 	}
 	
 	@Override
