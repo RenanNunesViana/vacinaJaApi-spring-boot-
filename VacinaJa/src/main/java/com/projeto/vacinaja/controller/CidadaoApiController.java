@@ -40,7 +40,7 @@ public class CidadaoApiController {
         return new ResponseEntity<String>("Cidadão cadastrado", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "cidadao/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/cidadao/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> atualizarCadastro(@PathVariable("id")String cpf, @RequestBody Cidadao cidadao) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
@@ -58,7 +58,7 @@ public class CidadaoApiController {
        return new ResponseEntity<String>("Dados atualizados com sucesso", HttpStatus.OK); 
     }
 	
-    @RequestMapping(value = "cidadao/{id}/estadovacinacao", method= RequestMethod.GET)
+    @RequestMapping(value = "/cidadao/{id}/estadovacinacao", method= RequestMethod.GET)
     public ResponseEntity<?> checarEstadoVacinacao(@PathVariable("id")String cpf) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
@@ -68,7 +68,7 @@ public class CidadaoApiController {
         return new ResponseEntity<String>(optionalCidadao.get().getEstadoVacinacao().toString(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "cidadao/{id}/agendamento", method = RequestMethod.PUT)
+    @RequestMapping(value = "/cidadao/{id}/agendamento", method = RequestMethod.PUT)
     public ResponseEntity<?> agendarVacinacao(@PathVariable("id")String cpf) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);

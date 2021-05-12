@@ -1,6 +1,7 @@
 package com.projeto.vacinaja.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.model.usuario.Funcionario;
-import com.projeto.vacinaja.model.vacina.Vacina;
 import com.projeto.vacinaja.service.CidadaoService;
 import com.projeto.vacinaja.service.FuncionarioService;
 import com.projeto.vacinaja.util.CidadaoErro;

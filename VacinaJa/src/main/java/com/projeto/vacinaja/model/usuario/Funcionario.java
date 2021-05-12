@@ -1,8 +1,7 @@
 package com.projeto.vacinaja.model.usuario;
 
-import com.projeto.vacinaja.model.estado.EstadoVacinacao;
-
 import javax.persistence.Entity;
+import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 
 @Entity
 public class Funcionario extends Usuario {
