@@ -2,7 +2,9 @@ package com.projeto.vacinaja.controller;
 
 import com.projeto.vacinaja.model.estado.NaoHabilitado1Dose;
 import com.projeto.vacinaja.model.usuario.Cidadao;
+import com.projeto.vacinaja.service.AgendamentoService;
 import com.projeto.vacinaja.service.CidadaoService;
+import com.projeto.vacinaja.service.LoteVacinaService;
 import com.projeto.vacinaja.util.CidadaoErro;
 
 import java.util.Optional;
@@ -25,6 +27,12 @@ public class CidadaoApiController {
 
 	@Autowired
     CidadaoService cidadaoService;
+
+    @Autowired
+    AgendamentoService agendamentoService;
+
+    @Autowired
+    LoteVacinaService loteVacinaService;
 
     @RequestMapping(value = "/cidadao/", method=RequestMethod.POST)
     public ResponseEntity<?> cadastrarCidadao(@RequestBody Cidadao cidadao, UriComponentsBuilder uciBuilder) {
@@ -74,6 +82,7 @@ public class CidadaoApiController {
             return CidadaoErro.erroCidadaoNaoEncontrado();
         }
         Cidadao currentCidadao = optionalCidadao.get();
+        // loteVacinaService.consultarLotePorVacina();
         // implementar Service de Agendamento
         // String agendamento = agendamentoService.agendar(currentCidadao.getEstadoVacinacao());
         // return new ResponseEntity<String>(agendamento, HttpStatus.OK);

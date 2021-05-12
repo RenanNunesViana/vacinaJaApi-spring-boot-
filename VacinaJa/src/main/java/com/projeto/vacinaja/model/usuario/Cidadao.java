@@ -16,7 +16,8 @@ public class Cidadao extends Usuario implements Notificavel{
 	
 	@OneToOne
 	public EstadoVacinacao estadoVacinacao;
-	
+
+
 	public void alterarEstadoVacinacao(EstadoVacinacao novoEstadoVacinacao) {
 		this.estadoVacinacao = novoEstadoVacinacao;
 	}
