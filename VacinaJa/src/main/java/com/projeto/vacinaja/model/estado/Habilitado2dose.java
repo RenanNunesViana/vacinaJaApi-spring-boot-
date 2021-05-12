@@ -9,11 +9,8 @@ public class Habilitado2dose extends EstadoVacinacao{
 	}
 
 	public void atualizar() {
+		// WIP
 		this.cidadao.alterarEstadoVacinacao(new FinalizadaVacinacao(this.cidadao));	
-	}
-	
-	public void tomarVacina() {
-		
 	}
 	
 	@Override

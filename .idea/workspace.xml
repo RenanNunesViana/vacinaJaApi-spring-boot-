@@ -5,12 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca21338e-de61-4edb-b903-5435f33dd792" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/FuncionarioApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/vacina/CarteiraVacinacao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/repository/FuncionarioRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/service/FuncionarioService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/service/FuncionarioServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/CidadaoErro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/FuncionarioErro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/AdmController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/AdmController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/CidadaoApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/CidadaoApiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/LoteVacinaApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/LoteVacinaApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/VacinaApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/VacinaApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/UsuarioController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/Esperando2dose.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/Esperando2dose.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/NaoHabilitado1Dose.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/NaoHabilitado1Dose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/EstadoVacinacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/EstadoVacinacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/FinalizadaVacinacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/FinalizadaVacinacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/Habilitado1Dose.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/Habilitado1Dose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/Habilitado2dose.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/estado/Habilitado2dose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/usuario/Cidadao.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/usuario/Cidadao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/usuario/Funcionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/usuario/Funcionario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/usuario/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/usuario/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/vacina/Vacina.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/model/vacina/Vacina.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/security/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/service/CidadaoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/service/CidadaoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/CustomErrorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/CustomErrorType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +97,7 @@
       <updated>1620168291026</updated>
       <workItem from="1620168308188" duration="6962000" />
       <workItem from="1620440813490" duration="5000" />
-      <workItem from="1620771122102" duration="10909000" />
+      <workItem from="1620771122102" duration="12033000" />
     </task>
     <servers />
   </component>
