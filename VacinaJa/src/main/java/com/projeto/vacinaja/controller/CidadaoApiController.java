@@ -30,7 +30,7 @@ public class CidadaoApiController {
     public ResponseEntity<?> cadastrarCidadao(@RequestBody Cidadao cidadao, UriComponentsBuilder uciBuilder) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cidadao.getCpf());
-        if(optional.isPresent()) {
+        if(optionalCidadao.isPresent()) {
             return CidadaoErro.erroCidadaoJaCadastrado();
         }
         cidadao.alterarEstadoVacinacao(new NaoHabilitado1Dose(cidadao));
@@ -42,7 +42,7 @@ public class CidadaoApiController {
     public ResponseEntity<?> atualizarCadastro(@PathVariable("id")String cpf, @RequestBody Cidadao cidadao) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
-         if(!optional.isPresent()) {
+         if(!optionalCidadao.isPresent()) {
             return CidadaoErro.erroCidadaoNaoEncontrado();
         }
         Cidadao tempCidadao = optionalCidadao.get();
@@ -70,7 +70,7 @@ public class CidadaoApiController {
     public ResponseEntity<?> agendarVacinacao(@PathVariable("id")String cpf) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
-        if(!optional.isPresent()) {
+        if(!optionalCidadao.isPresent()) {
             return CidadaoErro.erroCidadaoNaoEncontrado();
         }
         Cidadao currentCidadao = optionalCidadao.get();
