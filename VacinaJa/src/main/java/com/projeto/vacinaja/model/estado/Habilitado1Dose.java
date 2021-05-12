@@ -1,16 +1,13 @@
 package com.projeto.vacinaja.model.estado;
 
+
 import com.projeto.vacinaja.model.usuario.Cidadao;
 
-public class Habilitado1Dose extends EstadoVacinacao{
+public class Habilitado1Dose implements EstadoInterface{
 
-	public Habilitado1Dose(Cidadao cidadao) {
-		super(cidadao);
-	}
-
-	public void atualizar() {
+	public void proximoEstado(Cidadao cidadao) {
 		// WIP
-		this.cidadao.alterarEstadoVacinacao(new Esperando2dose(this.cidadao));
+		cidadao.alterarEstadoVacinacao(EstadoVacinacao.ESPERANDO_SEGUNDA_DOSE);
 	}
 	
 	@Override

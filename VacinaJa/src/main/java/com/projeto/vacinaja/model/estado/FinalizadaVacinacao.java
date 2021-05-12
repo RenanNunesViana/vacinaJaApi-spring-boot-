@@ -1,14 +1,11 @@
 package com.projeto.vacinaja.model.estado;
 
+
 import com.projeto.vacinaja.model.usuario.Cidadao;
 
-public class FinalizadaVacinacao extends EstadoVacinacao{
+public class FinalizadaVacinacao implements EstadoInterface{
 
-	public FinalizadaVacinacao(Cidadao cidadao) {
-		super(cidadao);
-	}
-
-	public void atualizar() {
+	public void proximoEstado(Cidadao cidadao) {
 		
 	}
 

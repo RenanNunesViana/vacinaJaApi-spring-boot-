@@ -3,24 +3,33 @@ package com.projeto.vacinaja.model.usuario;
 import com.projeto.vacinaja.model.Notificavel;
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 import com.projeto.vacinaja.model.vacina.CarteiraVacinacao;
+import com.sun.istack.NotNull;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class Cidadao extends Usuario implements Notificavel{
 	
-	public String numeroSUS;
-	public String email;
-	public String profissao;
-	public String comorbidades;
+	private String numeroSUS;
+	private String email;
+	private String profissao;
+	private String comorbidades;
 	
-	@OneToOne
-	public EstadoVacinacao estadoVacinacao;
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	private EstadoVacinacao estadoVacinacao;
 
 	@OneToOne
 	private CarteiraVacinacao carteiraVacinacao;
 
+//	public Cidadao(Long id, String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
+//			String telefone, String comorbidade)){
+//		super(id, nomeCompleto, endereco, cpf, email, dataNascimento, telefone, estadoVacinacao, comorbidade)
+//	}
 
 	public void alterarEstadoVacinacao(EstadoVacinacao novoEstadoVacinacao) {
 		this.estadoVacinacao = novoEstadoVacinacao;
@@ -82,7 +91,7 @@ public class Cidadao extends Usuario implements Notificavel{
 	@Override
 	public void notifica() {
 		// TODO Auto-generated method stub
-		this.estadoVacinacao.atualizar();
+		this.estadoVacinacao.proximoEstado(this);
 		
 	}
 }

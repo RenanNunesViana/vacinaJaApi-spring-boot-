@@ -42,7 +42,7 @@ public class CidadaoApiController {
         if(optionalCidadao.isPresent()) {
             return CidadaoErro.erroCidadaoJaCadastrado();
         }
-        cidadao.alterarEstadoVacinacao(new NaoHabilitado1Dose(cidadao));
+        cidadao.alterarEstadoVacinacao(EstadoVacinacao.NAO_HABILITADO);
         cidadaoService.salvarCidadao(cidadao);
         return new ResponseEntity<String>("Cidadão cadastrado", HttpStatus.CREATED);
     }
@@ -85,8 +85,8 @@ public class CidadaoApiController {
         Cidadao currentCidadao = optionalCidadao.get();
         Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(currentCidadao.getCarteriaVacinacao().getNomeVacina());
         Optional<LoteVacina> optionalLote = loteVacinaService.consultarLotePorVacina(optionalVacina.get());
-        boolean habilitado = (currentCidadao.getEstadoVacinacao() instanceof Habilitado2dose) || (currentCidadao.getEstadoVacinacao() instanceof Habilitado1Dose);
-        int dose = (currentCidadao.getEstadoVacinacao() instanceof Habilitado1Dose ? 1 : 2);
+        boolean habilitado = (currentCidadao.getEstadoVacinacao() == EstadoVacinacao.HABILITADO_SEGUNDA_DOSE) || (currentCidadao.getEstadoVacinacao() == EstadoVacinacao.HABILITADO_PRIMEIRA_DOSE);
+        int dose = (currentCidadao.getEstadoVacinacao() == EstadoVacinacao.HABILITADO_PRIMEIRA_DOSE ? 1 : 2);
         if(optionalLote.get().getDoses() >= 0 && habilitado) {
             agendamentoService.cadastrarAgendamento(new Agendamento(cpf, dose, "05/05/2022-14:00"));
         }
