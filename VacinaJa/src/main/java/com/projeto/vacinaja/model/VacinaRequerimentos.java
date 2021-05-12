@@ -5,8 +5,8 @@ import java.util.List;
 
 
 public class VacinaRequerimentos {
-	private final int IDADE_VACINACAO = 65;
-    private final String PROFISSAO_VACINACAO = "Policial";
+	private int IDADE_VACINACAO = 65;
+    private String PROFISSAO_VACINACAO = "Policial";
 
     String[] strArray = {"Diabetes", "Doença Renal Crônica", "Doença Cardíaca Crônica", "Doença Respiratória Crônica"};
     List<String> COMORBIDADE_VACINACAO = Arrays.asList(strArray);
@@ -21,5 +21,13 @@ public class VacinaRequerimentos {
     
     public List<String> getListaDeComorbidades() {
     	return this.COMORBIDADE_VACINACAO;
+    }
+
+    public void setIdadeVacinacao(int idadeVacinacao) {
+        this.IDADE_VACINACAO = idadeVacinacao;
+    }
+
+    public void setProfissaoVacinacao(String profissao) {
+        this.PROFISSAO_VACINACAO = profissao;
     }
 }
