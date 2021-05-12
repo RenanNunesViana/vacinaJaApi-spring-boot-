@@ -1,10 +1,7 @@
 package com.projeto.vacinaja.model.usuario;
 
-import java.util.ArrayList;
-
 import javax.persistence.Entity;
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
-import com.projeto.vacinaja.model.vacina.Vacina;
 
 @Entity
 public class Funcionario extends Usuario {

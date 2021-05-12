@@ -19,12 +19,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin();
+		http.csrf().disable().
+		authorizeRequests().
+		antMatchers("/api/cidadao").hasAnyAuthority("ADMIN", "CIDADAO").
+		antMatchers("/api/funcionarios", "/api/funcionario/").hasAnyAuthority("FUNCIONARIO").
+		anyRequest().authenticated().and().formLogin();
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.inMemoryAuthentication().withUser("user").
-		password(passwordEncoder().encode("password")).authorities("ADMIN");
+		auth.inMemoryAuthentication().
+		withUser("func").
+		password(passwordEncoder().encode("password")).authorities("FUNCIONARIO").
+		and().
+		withUser("user").
+		password(passwordEncoder().encode("password")).authorities("CIDADAO");
 	}
 }
