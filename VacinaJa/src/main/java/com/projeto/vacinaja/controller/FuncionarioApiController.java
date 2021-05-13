@@ -76,18 +76,17 @@ public class FuncionarioApiController {
 		return new ResponseEntity<Funcionario>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/funcionario/", method = RequestMethod.POST)
-	public ResponseEntity<?> habilitarCidadaoParaVacinaca(@RequestBody int dosesDisponiveis, PerfilVacinacao perfil,
+	@RequestMapping(value = "/funcionario/", method = RequestMethod.PUT)
+	public ResponseEntity<?> habilitarCidadaoParaVacinacao(@RequestBody int dosesDisponiveis, PerfilVacinacao perfil,
 			int numeroDaDose) {
 		funcionarioService.habilitarCidadaoParaVacinacao(dosesDisponiveis, perfil, numeroDaDose);
 		return new ResponseEntity<String>("Cidadão habilitado para vacinação", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/funcionario/{id}", method = RequestMethod.POST)
-	public ResponseEntity<?> registrarVacinacaoDeCidadao(@PathVariable("cpf") String cpf, @RequestBody String dataVacinacao, long loteVacina,
+	@RequestMapping(value = "/funcionario/", method = RequestMethod.PUT)
+	public ResponseEntity<?> registrarVacinacaoDeCidadao(@RequestBody String cpf, String dataVacinacao, long loteVacina,
 			String nomeVacina, int numeroDose) {
 		funcionarioService.registrarVacinacaoDeCidadao(cpf, dataVacinacao, loteVacina, nomeVacina, numeroDose);
-		;
 		return new ResponseEntity<String>("Vacinação registrada com sucesso", HttpStatus.OK);
 	}
 
