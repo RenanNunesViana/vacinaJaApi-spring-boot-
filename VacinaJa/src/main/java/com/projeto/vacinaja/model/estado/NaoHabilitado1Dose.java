@@ -9,7 +9,7 @@ public class NaoHabilitado1Dose implements EstadoInterface{
 		String dataDeNascimento = cidadao.getDataNascimento();
 		String comorbidade = cidadao.getComorbidade();
 		String profissao = cidadao.getProfissao();
-		// RequerimentosPrimeiraDose rpd = new RequerimentosPrimeiraDose();	
+//		RequerimentosPrimeiraDose rpd = new RequerimentosPrimeiraDose();	
 		// if(rpd.checaRequerimentos(dataDeNascimento, comorbidade, profissao))
 			//this.cidadao.alterarEstadoVacinacao(new Habilitado1Dose(this.cidadao));
 	}

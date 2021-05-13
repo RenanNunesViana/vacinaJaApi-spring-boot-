@@ -88,7 +88,6 @@ public class Cidadao extends Usuario implements Notificavel{
 
 	@Override
 	public void notifica() {
-		// TODO Auto-generated method stub
 		this.estadoVacinacao.proximoEstado(this);
 		
 	}

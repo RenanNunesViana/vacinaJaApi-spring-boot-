@@ -93,4 +93,10 @@ public class CidadaoApiController {
         }
         return new ResponseEntity<String>("Agendamento realizado com sucesso", HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/cidado/{id}/agendamento", method = RequestMethod.GET)
+    public ResponseEntity<?> checarAgendamento(@PathVariable("id")String cpf) {
+        Optional<Agendamento> optionalAgendamento = agendamentoService.recuperarAgendamentoPorCpf(cpf);
+        return new ResponseEntity<Agendamento>(optionalAgendamento.get(), HttpStatus.OK);
+    }
 }
