@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.projeto.vacinaja.model.PerfilVacinacao;
 import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.model.usuario.Funcionario;
+import com.projeto.vacinaja.model.vacina.LoteVacina;
+import com.projeto.vacinaja.model.vacina.Vacina;
 import com.projeto.vacinaja.service.CidadaoService;
 import com.projeto.vacinaja.service.FuncionarioService;
 import com.projeto.vacinaja.util.CidadaoErro;
+import com.projeto.vacinaja.util.ErroVacina;
 import com.projeto.vacinaja.util.FuncionarioErro;
 
 @RestController
@@ -70,6 +74,21 @@ public class FuncionarioApiController {
 		}
 		funcionarioService.removerFuncionario(cpf);
 		return new ResponseEntity<Funcionario>(HttpStatus.NO_CONTENT);
+	}
+
+	@RequestMapping(value = "/funcionario/", method = RequestMethod.POST)
+	public ResponseEntity<?> habilitarCidadaoParaVacinaca(@RequestBody int dosesDisponiveis, PerfilVacinacao perfil,
+			int numeroDaDose) {
+		funcionarioService.habilitarCidadaoParaVacinacao(dosesDisponiveis, perfil, numeroDaDose);
+		return new ResponseEntity<String>("Cidadão habilitado para vacinação", HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/funcionario/{id}", method = RequestMethod.POST)
+	public ResponseEntity<?> registrarVacinacaoDeCidadao(@PathVariable("cpf") String cpf, @RequestBody String dataVacinacao, long loteVacina,
+			String nomeVacina, int numeroDose) {
+		funcionarioService.registrarVacinacaoDeCidadao(cpf, dataVacinacao, loteVacina, nomeVacina, numeroDose);
+		;
+		return new ResponseEntity<String>("Vacinação registrada com sucesso", HttpStatus.OK);
 	}
 
 }
