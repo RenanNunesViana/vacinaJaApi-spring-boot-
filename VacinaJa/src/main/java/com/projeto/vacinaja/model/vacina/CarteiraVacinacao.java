@@ -11,13 +11,17 @@ public class CarteiraVacinacao {
 	@GeneratedValue
 	private long iD;
 	
+	private long loteVacina;
+	
     private String data1Dose;
+    
+    private String data2Dose;
 
     private int numeroDaDose;
-    
+   
     private String nomeVacina;
 
-	public CarteiraVacinacao(){
+	public CarteiraVacinacao() {
 		
 	}
 
@@ -55,4 +59,17 @@ public class CarteiraVacinacao {
 	public long getId() {
 		return this.iD;
 	}
+	
+	public void setData2Dose(String data2Dose) {
+		this.data2Dose = data2Dose;
+	}
+	
+	public String getData2Dose() {
+		return this.data2Dose;
+	}
+
+	public void setLoteVacina(long loteVacina) {
+		this.loteVacina = loteVacina;
+	}
+	
 }

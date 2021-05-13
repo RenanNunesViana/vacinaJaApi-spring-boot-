@@ -23,8 +23,8 @@ public class CidadaoServiceImpl implements CidadaoService{
 
     @Override
     public void removerCidadao(String cpf) {
-    	Optional<Cidadao> aux = this.cidadaoRepository.findByCpf(cpf);
-        this.cidadaoRepository.delete(aux.get());
+    	Cidadao aux = this.cidadaoRepository.getOne(cpf);
+        this.cidadaoRepository.delete(aux);
     }
 
     @Override
@@ -34,13 +34,13 @@ public class CidadaoServiceImpl implements CidadaoService{
 
     @Override
     public Optional<Cidadao> pegarCidadao(String cpf) {
-        return this.cidadaoRepository.findByCpf(cpf);
+        return this.cidadaoRepository.findById(cpf);
     }
 
 	@Override
 	public EstadoVacinacao consultarEstagioVacinacao(String cpf) {
-		Optional<Cidadao> aux = this.cidadaoRepository.findByCpf(cpf);
-		return aux.get().getEstadoVacinacao();
+		Cidadao aux = this.cidadaoRepository.getOne(cpf);
+		return aux.getEstadoVacinacao();
 	}
 
 	@Override

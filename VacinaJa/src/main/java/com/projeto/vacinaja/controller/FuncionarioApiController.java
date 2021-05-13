@@ -54,8 +54,8 @@ public class FuncionarioApiController {
 	}
 
 	@RequestMapping(value = "/funcionario/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> consultarFuncionario(@PathVariable("id") Long id) {
-		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionarioPeloId(id);
+	public ResponseEntity<?> consultarFuncionario(@PathVariable("id") String cpf) {
+		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionario(cpf);
 		if (!optionalFuncionario.isPresent()) {
 			return FuncionarioErro.erroFuncionarioNaoEncontrado();
 		}
@@ -63,12 +63,12 @@ public class FuncionarioApiController {
 	}
 
 	@RequestMapping(value = "/funcionario/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> removerFuncionario(@PathVariable("id") Long id) {
-		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionarioPeloId(id);
+	public ResponseEntity<?> removerFuncionario(@PathVariable("id") String cpf) {
+		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionario(cpf);
 		if (!optionalFuncionario.isPresent()) {
 			return FuncionarioErro.erroFuncionarioNaoEncontrado();
 		}
-		funcionarioService.removerFuncionario(id);
+		funcionarioService.removerFuncionario(cpf);
 		return new ResponseEntity<Funcionario>(HttpStatus.NO_CONTENT);
 	}
 

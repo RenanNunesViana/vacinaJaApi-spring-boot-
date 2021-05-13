@@ -42,7 +42,7 @@ public class Cidadao extends Usuario implements Notificavel{
 	public void alterarEstadoVacinacao(EstadoVacinacao novoEstadoVacinacao) {
 		this.estadoVacinacao = novoEstadoVacinacao;
 	}
-	/*US-14*/
+
 	public void alteraNomeCompleto(String novoNome) {
 		super.nomeCompleto = novoNome;
 	}
@@ -68,9 +68,6 @@ public class Cidadao extends Usuario implements Notificavel{
 		this.profissao = novaProfissao;
 	}
 	
-	// public void fazerLogin(String CPF) {  
-	// }
-
 	public String getNumeroSUS() {
 		return numeroSUS;
 	}
@@ -88,11 +85,6 @@ public class Cidadao extends Usuario implements Notificavel{
 	public CarteiraVacinacao getCarteriaVacinacao() {
 		return carteiraVacinacao;
 	}
-
-	// /*US-17*/public String agendarVacinacao() {
-	// 	String confirmacaoAgendamento = "";
-	// 	return confirmacaoAgendamento;
-	// }
 
 	@Override
 	public void notifica() {
