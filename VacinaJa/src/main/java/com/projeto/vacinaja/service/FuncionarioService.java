@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.projeto.vacinaja.model.PerfilVacinacao;
 import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.model.usuario.Funcionario;
 import com.projeto.vacinaja.model.vacina.Vacina;
@@ -14,13 +15,12 @@ public interface FuncionarioService {
 
 	public List<Funcionario> listarFuncionarios();
 
-	public Optional<Funcionario> retornaFuncionarioPeloId(Long id);
+	public Optional<Funcionario> retornaFuncionario(String cpf);
 
-	public void removerFuncionario(Long id);
+	public void removerFuncionario(String cpf);
 
-	public void habilitarCidadaoParaVacinacao(ArrayList<Cidadao> listaCidadaos, int dosesDisponiveis, String perfil);
-
-	public void registrarVacinacaoDeCidadao(String cpf, String dataVacinacao, int loteVacina, Vacina tipo,
+	public void registrarVacinacaoDeCidadao(String cpf, String dataVacinacao, long loteVacina, String nomeVacina,
 			int numeroDose);
 
+	public void habilitarCidadaoParaVacinacao(int dosesDisponiveis, PerfilVacinacao perfil, int numeroDaDose);
 }

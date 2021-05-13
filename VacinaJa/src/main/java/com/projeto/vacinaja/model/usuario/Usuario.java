@@ -10,15 +10,14 @@ import javax.persistence.Id;
 public abstract class Usuario {
 	
 	@Id
-	@GeneratedValue
-	public Long id;
+	public String cpf;
 	public String nomeCompleto;
 	public String endereco;
-	public String cpf;
 	public String email;
 	public String dataNascimento;
 	public String telefone;
 	public String comorbidade;
+	public int idade;
 	
 	public Usuario() {
 	}
@@ -34,20 +33,15 @@ public abstract class Usuario {
 		this.telefone = telefone;
 	}
 	
-	public Usuario(Long id, String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
+	public Usuario(String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
 			String telefone, EstadoVacinacao estadoVacinacao, String comorbidade) {
 		super();
-		this.id = id;
 		this.nomeCompleto = nomeCompleto;
 		this.endereco = endereco;
 		this.cpf = cpf;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	public String getNomeCompleto() {
@@ -76,5 +70,9 @@ public abstract class Usuario {
 
 	public String getComorbidade() {
 		return comorbidade;
+	}
+	
+	public int getIdade() {
+		return this.idade;
 	}
 }
