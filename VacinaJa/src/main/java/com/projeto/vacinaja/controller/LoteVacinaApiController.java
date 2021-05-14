@@ -27,16 +27,21 @@ public class LoteVacinaApiController {
 	@RequestMapping(value = "/lotes", method = RequestMethod.GET)
 	public ResponseEntity<?> listarLotes() {
 		List<LoteVacina> lotes = loteVacinaService.listarLotesVacinas();
-		if (lotes.isEmpty())
+		if (lotes.isEmpty()){
 			return ErroLoteVacina.erroNenhumLoteCadastrado();
+		}
 		return new ResponseEntity<List<LoteVacina>>(lotes, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/vacina/{id}/lote", method = RequestMethod.POST)
 	public ResponseEntity<?> cadastraLote(@PathVariable("id") String id, @RequestBody int numeroDoses, String dataDeValidade) {
 		Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(id);
-		if (!optionalVacina.isPresent())
+		if (!optionalVacina.isPresent()){
 			return ErroVacina.erroVacinaNaoEncontrada(id);
+		}
+		if(numeroDoses > 2 && numeroDoses > 0){
+			return ErroVacina.erroVacinaNumeroDeDoseInvalido();
+		}
 		LoteVacina novoLote = new LoteVacina(optionalVacina.get(), numeroDoses, dataDeValidade);
 		loteVacinaService.salvarLoteVacina(novoLote);
 		return new ResponseEntity<LoteVacina>(novoLote, HttpStatus.CREATED);
@@ -45,8 +50,9 @@ public class LoteVacinaApiController {
 	@RequestMapping(value = "/vacina/{id}/lote", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarLotePorVacina(@PathVariable String id) {
 		Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(id);
-		if (!optionalVacina.isPresent())
+		if (!optionalVacina.isPresent()){
 			return ErroVacina.erroVacinaNaoEncontrada(id);
+		}
 		Optional<LoteVacina> optionalLote = loteVacinaService.consultarLotePorVacina(optionalVacina.get());
 		return new ResponseEntity<LoteVacina>(optionalLote.get(), HttpStatus.OK);
 	}
