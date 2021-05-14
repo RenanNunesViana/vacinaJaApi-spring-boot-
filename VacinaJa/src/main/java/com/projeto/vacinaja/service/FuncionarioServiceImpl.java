@@ -111,4 +111,10 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		c.notifica();
 		lv.setDoses(lv.getDoses() - 1);
 	}
+
+	@Override
+	public void aprovaFuncionario(String cpf) {
+		 funcionarioRepository.getOne(cpf).setAprovacao(true);
+		
+	}
 }

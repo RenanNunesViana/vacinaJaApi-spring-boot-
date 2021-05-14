@@ -23,4 +23,6 @@ public interface FuncionarioService {
 			int numeroDose);
 
 	public void habilitarCidadaoParaVacinacao(int dosesDisponiveis, PerfilVacinacao perfil, int numeroDaDose);
+
+	public void aprovaFuncionario(String cpf);
 }
