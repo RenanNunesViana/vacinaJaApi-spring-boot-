@@ -12,5 +12,6 @@ public interface LoteVacinaService {
     public void removerLoteVacina(long idLoteVacina);
     public Optional <LoteVacina> consultarLotePorVacina(Vacina vacina);
     public List <LoteVacina> listarLotesVacinas();
+    public Optional <LoteVacina> consultarLotePorId(long id);
 
 }
