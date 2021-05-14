@@ -32,9 +32,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 	@Override
 	public void cadastrarFuncionario(Funcionario funcionario) {
-		// if (cidadaoRepository.findByCpf(funcionario.getCpf()) != null) {
 		funcionarioRepository.save(funcionario);
-		// }
+		
 	}
 
 	@Override

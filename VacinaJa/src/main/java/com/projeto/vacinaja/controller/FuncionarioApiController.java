@@ -90,6 +90,7 @@ public class FuncionarioApiController {
 			int numeroDaDose) {
 		funcionarioService.habilitarCidadaoParaVacinacao(dosesDisponiveis, perfil, numeroDaDose);
 		return new ResponseEntity<String>("Cidadão habilitado para vacinação", HttpStatus.OK);
+		
 	}
 
 	@RequestMapping(value = "/funcionario/", method = RequestMethod.PUT)
