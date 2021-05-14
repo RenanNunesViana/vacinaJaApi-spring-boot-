@@ -35,4 +35,10 @@ public class LoteVacinaServiceImpl implements LoteVacinaService{
     public List<LoteVacina> listarLotesVacinas() {
         return this.loteVacinaRepository.findAll();
     }
+
+	@Override
+	public Optional<LoteVacina> consultarLotePorId(long id) {
+		return this.loteVacinaRepository.findById(id);
+		
+	}
 }

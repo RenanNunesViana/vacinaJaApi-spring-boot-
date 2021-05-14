@@ -22,7 +22,10 @@ import com.projeto.vacinaja.model.vacina.LoteVacina;
 import com.projeto.vacinaja.model.vacina.Vacina;
 import com.projeto.vacinaja.service.CidadaoService;
 import com.projeto.vacinaja.service.FuncionarioService;
+import com.projeto.vacinaja.service.LoteVacinaService;
+import com.projeto.vacinaja.service.VacinaService;
 import com.projeto.vacinaja.util.CidadaoErro;
+import com.projeto.vacinaja.util.ErroLoteVacina;
 import com.projeto.vacinaja.util.ErroVacina;
 import com.projeto.vacinaja.util.FuncionarioErro;
 
@@ -36,6 +39,12 @@ public class FuncionarioApiController {
 
 	@Autowired
 	CidadaoService cidadaoService;
+
+	@Autowired
+	VacinaService vacinaService;
+	
+	@Autowired
+	LoteVacinaService loteService;
 
 	@RequestMapping(value = "/funcionarios", method = RequestMethod.GET)
 	public ResponseEntity<?> listarFuncionarios() {
@@ -86,6 +95,32 @@ public class FuncionarioApiController {
 	@RequestMapping(value = "/funcionario/", method = RequestMethod.PUT)
 	public ResponseEntity<?> registrarVacinacaoDeCidadao(@RequestBody String cpf, String dataVacinacao, long loteVacina,
 			String nomeVacina, int numeroDose) {
+		Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(nomeVacina);
+		Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
+		Optional<LoteVacina> optionalLote = loteService.consultarLotePorId(loteVacina);
+		if (!optionalVacina.isPresent()) {
+			return ErroVacina.erroVacinaNaoEncontrada(nomeVacina);
+		}
+		if (optionalVacina.get().getNumeroDoses() < numeroDose) {
+			return ErroVacina.erroVacinaNaoPossuiDose(nomeVacina);
+		}
+		if (!optionalCidadao.isPresent()) {
+			return CidadaoErro.erroCidadaoNaoEncontrado();
+		}
+		if(!optionalLote.isPresent()) {
+			return ErroLoteVacina.erroLoteVacinaNaoCadastrada(loteVacina);
+		}
+		if(!optionalLote.get().getVacina().getNomeVacina().equals(nomeVacina)) {
+			return ErroLoteVacina.erroLoteVacinaErrada(loteVacina, nomeVacina);
+		}
+		if(optionalLote.get().getDoses() == 0) {
+			return ErroLoteVacina.erroLoteVacinaSemDoses();
+		}
+		/*if(checa se esta habiltiado para tomar a 1 dose e numero dose != 1)
+		 * if(checa se esta habiltiado para tomar a 2 dose e numero dose != 2)
+		 * 
+		 */
+		
 		funcionarioService.registrarVacinacaoDeCidadao(cpf, dataVacinacao, loteVacina, nomeVacina, numeroDose);
 		return new ResponseEntity<String>("Vacinação registrada com sucesso", HttpStatus.OK);
 	}
