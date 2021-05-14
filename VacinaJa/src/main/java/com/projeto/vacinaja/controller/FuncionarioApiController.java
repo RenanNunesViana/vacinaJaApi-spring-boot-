@@ -1,20 +1,5 @@
 package com.projeto.vacinaja.controller;
 
-import java.util.List;
-
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import com.projeto.vacinaja.model.PerfilVacinacao;
 import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.model.usuario.Funcionario;
@@ -24,10 +9,18 @@ import com.projeto.vacinaja.service.CidadaoService;
 import com.projeto.vacinaja.service.FuncionarioService;
 import com.projeto.vacinaja.service.LoteVacinaService;
 import com.projeto.vacinaja.service.VacinaService;
-import com.projeto.vacinaja.util.CidadaoErro;
+import com.projeto.vacinaja.util.ErroCidadao;
 import com.projeto.vacinaja.util.ErroLoteVacina;
 import com.projeto.vacinaja.util.ErroVacina;
-import com.projeto.vacinaja.util.FuncionarioErro;
+import com.projeto.vacinaja.util.ErroFuncionario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -50,7 +43,7 @@ public class FuncionarioApiController {
 	public ResponseEntity<?> listarFuncionarios() {
 		List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
 		if (funcionarios.isEmpty()) {
-			return FuncionarioErro.erroNenhumFuncionarioCadastrado();
+			return ErroFuncionario.erroNenhumFuncionarioCadastrado();
 		}
 		return new ResponseEntity<List<Funcionario>>(funcionarios, HttpStatus.OK);
 	}
@@ -60,7 +53,7 @@ public class FuncionarioApiController {
 			UriComponentsBuilder uciBuilder) {
 		Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(novoFuncionario.getCpf());
 		if (!optionalCidadao.isPresent()) {
-			return CidadaoErro.erroCidadaoNaoEncontrado();
+			return ErroCidadao.erroCidadaoNaoEncontrado();
 		}
 		funcionarioService.cadastrarFuncionario(novoFuncionario);
 		return new ResponseEntity<String>("Funcionário Cadastradado", HttpStatus.CREATED);
@@ -70,7 +63,7 @@ public class FuncionarioApiController {
 	public ResponseEntity<?> consultarFuncionario(@PathVariable("id") String cpf) {
 		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionario(cpf);
 		if (!optionalFuncionario.isPresent()) {
-			return FuncionarioErro.erroFuncionarioNaoEncontrado();
+			return ErroFuncionario.erroFuncionarioNaoEncontrado();
 		}
 		return new ResponseEntity<Funcionario>(optionalFuncionario.get(), HttpStatus.OK);
 	}
@@ -79,22 +72,24 @@ public class FuncionarioApiController {
 	public ResponseEntity<?> removerFuncionario(@PathVariable("id") String cpf) {
 		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionario(cpf);
 		if (!optionalFuncionario.isPresent()) {
-			return FuncionarioErro.erroFuncionarioNaoEncontrado();
+			return ErroFuncionario.erroFuncionarioNaoEncontrado();
 		}
 		funcionarioService.removerFuncionario(cpf);
 		return new ResponseEntity<Funcionario>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/funcionario/", method = RequestMethod.PUT)
-	public ResponseEntity<?> habilitarCidadaoParaVacinacao(@RequestBody int dosesDisponiveis, PerfilVacinacao perfil,
-			int numeroDaDose) {
+	@RequestMapping(value = "/funcionario/cidadao", method = RequestMethod.PUT)
+	public ResponseEntity<?> habilitarCidadaoParaVacinacao(@RequestBody PerfilVacinacao perfil,int numeroDaDose) {
+		if(numeroDaDose > 2){
+			return ErroVacina.erroVacinaNumeroDeDoseInvalido();
+		}
+		int dosesDisponiveis = loteService.numeroTotalDoses();
 		funcionarioService.habilitarCidadaoParaVacinacao(dosesDisponiveis, perfil, numeroDaDose);
 		return new ResponseEntity<String>("Cidadão habilitado para vacinação", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/funcionario/", method = RequestMethod.PUT)
-	public ResponseEntity<?> registrarVacinacaoDeCidadao(@RequestBody String cpf, String dataVacinacao, long loteVacina,
-			String nomeVacina, int numeroDose) {
+	@RequestMapping(value = "/funcionario/cidadao/carteira", method = RequestMethod.PUT)
+	public ResponseEntity<?> registrarVacinacaoDeCidadao(@RequestBody String cpf, String dataVacinacao, long loteVacina,String nomeVacina, int numeroDose) {
 		Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(nomeVacina);
 		Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
 		Optional<LoteVacina> optionalLote = loteService.consultarLotePorId(loteVacina);
@@ -105,7 +100,7 @@ public class FuncionarioApiController {
 			return ErroVacina.erroVacinaNaoPossuiDose(nomeVacina);
 		}
 		if (!optionalCidadao.isPresent()) {
-			return CidadaoErro.erroCidadaoNaoEncontrado();
+			return ErroCidadao.erroCidadaoNaoEncontrado();
 		}
 		if(!optionalLote.isPresent()) {
 			return ErroLoteVacina.erroLoteVacinaNaoCadastrada(loteVacina);

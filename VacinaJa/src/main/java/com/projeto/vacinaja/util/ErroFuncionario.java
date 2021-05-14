@@ -3,7 +3,7 @@ package com.projeto.vacinaja.util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public class FuncionarioErro {
+public class ErroFuncionario {
 	
 	static final String FUNCIONARIO_JA_CADASTRADO = "O funcionário já foi cadastrado";
 
@@ -13,19 +13,19 @@ public class FuncionarioErro {
 
 	public static ResponseEntity<CustomErrorType> erroFuncionarioJaCadastrado() {
 		return new ResponseEntity<CustomErrorType>(
-				new CustomErrorType(FuncionarioErro.FUNCIONARIO_JA_CADASTRADO),
+				new CustomErrorType(ErroFuncionario.FUNCIONARIO_JA_CADASTRADO),
 				HttpStatus.CONFLICT);
 	}
 	
 	public static ResponseEntity<CustomErrorType> erroNenhumFuncionarioCadastrado() {
 		return new ResponseEntity<CustomErrorType>(
-				new CustomErrorType(FuncionarioErro.NENHUM_FUNCIONARIO_CADASTRADO),
+				new CustomErrorType(ErroFuncionario.NENHUM_FUNCIONARIO_CADASTRADO),
 				HttpStatus.NOT_FOUND);
 	}
 	
 	public static ResponseEntity<CustomErrorType> erroFuncionarioNaoEncontrado() {
 		return new ResponseEntity<CustomErrorType>(
-				new CustomErrorType(FuncionarioErro.FUNCIONARIO_NAO_ENCONTRADO),
+				new CustomErrorType(ErroFuncionario.FUNCIONARIO_NAO_ENCONTRADO),
 				HttpStatus.NOT_FOUND);
 	}
 

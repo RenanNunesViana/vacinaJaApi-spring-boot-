@@ -3,7 +3,7 @@ package com.projeto.vacinaja.util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public class CidadaoErro {
+public class ErroCidadao {
 	
 	static final String CIDADAO_JA_CADASTRADO = "O cidadão já foi cadastrado";
 
@@ -13,19 +13,19 @@ public class CidadaoErro {
 
 	public static ResponseEntity<CustomErrorType> erroCidadaoJaCadastrado() {
 		return new ResponseEntity<CustomErrorType>(
-				new CustomErrorType(CidadaoErro.CIDADAO_JA_CADASTRADO),
+				new CustomErrorType(ErroCidadao.CIDADAO_JA_CADASTRADO),
 				HttpStatus.CONFLICT);
 	}
 	
 	public static ResponseEntity<CustomErrorType> erroNenhumCidadaoCadastrado() {
 		return new ResponseEntity<CustomErrorType>(
-				new CustomErrorType(CidadaoErro.NENHUM_CIDADAO_CADASTRADO),
+				new CustomErrorType(ErroCidadao.NENHUM_CIDADAO_CADASTRADO),
 				HttpStatus.NOT_FOUND);
 	}
 	
 	public static ResponseEntity<CustomErrorType> erroCidadaoNaoEncontrado() {
 		return new ResponseEntity<CustomErrorType>(
-				new CustomErrorType(CidadaoErro.CIDADAO_NAO_ENCONTRADO),
+				new CustomErrorType(ErroCidadao.CIDADAO_NAO_ENCONTRADO),
 				HttpStatus.NOT_FOUND);
 	}
 }

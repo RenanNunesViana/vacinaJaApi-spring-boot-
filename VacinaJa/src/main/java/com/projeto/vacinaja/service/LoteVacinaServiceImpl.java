@@ -41,4 +41,16 @@ public class LoteVacinaServiceImpl implements LoteVacinaService{
 		return this.loteVacinaRepository.findById(id);
 		
 	}
+
+    @Override
+    public int numeroTotalDoses() {
+
+        int total = 0;
+        for(LoteVacina l : this.loteVacinaRepository.findAll()){
+
+            total += l.getDoses();
+
+        }
+        return total;
+    }
 }
