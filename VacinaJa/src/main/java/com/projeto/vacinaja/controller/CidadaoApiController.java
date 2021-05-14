@@ -9,12 +9,11 @@ import com.projeto.vacinaja.service.AgendamentoService;
 import com.projeto.vacinaja.service.CidadaoService;
 import com.projeto.vacinaja.service.LoteVacinaService;
 import com.projeto.vacinaja.service.VacinaService;
-import com.projeto.vacinaja.util.CidadaoErro;
+import com.projeto.vacinaja.util.ErroCidadao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Optional;
 
@@ -41,7 +40,7 @@ public class CidadaoApiController {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         if(optionalCidadao.isPresent()) {
-            return CidadaoErro.erroCidadaoJaCadastrado();
+            return ErroCidadao.erroCidadaoJaCadastrado();
         }
         Cidadao novoCidadao = new Cidadao(nome, endereco, cpf, email, dataDeNascimento, telefone, numeroSUS, profissao);
         cidadaoService.salvarCidadao(novoCidadao);
@@ -53,7 +52,7 @@ public class CidadaoApiController {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
          if(!optionalCidadao.isPresent()) {
-            return CidadaoErro.erroCidadaoNaoEncontrado();
+            return ErroCidadao.erroCidadaoNaoEncontrado();
         }
         Cidadao tempCidadao = optionalCidadao.get();
         tempCidadao.alteraNomeCompleto(nomeCompleto);
@@ -71,7 +70,7 @@ public class CidadaoApiController {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         if(!optionalCidadao.isPresent()) {
-            return CidadaoErro.erroCidadaoNaoEncontrado();
+            return ErroCidadao.erroCidadaoNaoEncontrado();
         }
         return new ResponseEntity<String>(optionalCidadao.get().getEstadoVacinacao().toString(), HttpStatus.OK);
     }
@@ -81,7 +80,7 @@ public class CidadaoApiController {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         if(!optionalCidadao.isPresent()) {
-            return CidadaoErro.erroCidadaoNaoEncontrado();
+            return ErroCidadao.erroCidadaoNaoEncontrado();
         }
         Cidadao currentCidadao = optionalCidadao.get();
         Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(currentCidadao.getCarteriaVacinacao().getNomeVacina());
@@ -96,6 +95,10 @@ public class CidadaoApiController {
 
     @RequestMapping(value = "/cidado/{id}/agendamento", method = RequestMethod.GET)
     public ResponseEntity<?> checarAgendamento(@PathVariable("id")String cpf) {
+        Optional<Cidadao> cidadao = cidadaoService.pegarCidadao(cpf);
+        if(!cidadao.isPresent()){
+            return ErroCidadao.erroCidadaoNaoEncontrado();
+        }
         Optional<Agendamento> optionalAgendamento = agendamentoService.recuperarAgendamentoPorCpf(cpf);
         return new ResponseEntity<Agendamento>(optionalAgendamento.get(), HttpStatus.OK);
     }

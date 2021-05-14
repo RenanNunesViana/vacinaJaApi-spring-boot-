@@ -1,11 +1,7 @@
 package com.projeto.vacinaja.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projeto.vacinaja.model.PerfilVacinacao;
@@ -16,7 +12,6 @@ import com.projeto.vacinaja.model.vacina.LoteVacina;
 import com.projeto.vacinaja.repository.CidadaoRepository;
 import com.projeto.vacinaja.repository.FuncionarioRepository;
 import com.projeto.vacinaja.repository.LoteVacinaRepository;
-import com.projeto.vacinaja.repository.VacinaRepository;
 
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
@@ -25,8 +20,6 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	private FuncionarioRepository funcionarioRepository;
 	@Autowired
 	private CidadaoRepository cidadaoRepository;
-	@Autowired
-	private VacinaRepository vacinaRepository;
 	@Autowired
 	private LoteVacinaRepository loteRepository;
 
@@ -54,8 +47,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 	@Override
 	public void habilitarCidadaoParaVacinacao(int dosesDisponiveis, PerfilVacinacao perfil, int numeroDaDose) {
-		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-		long diasDiferenca = 0;
+		//SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		//long diasDiferenca = 0;
 
 		List<Cidadao> cidadaos = this.cidadaoRepository.findAll();
 		List<String> comorbidades = perfil.getListaDeComorbidades();
@@ -70,12 +63,12 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 						|| perfil.getIdadeDePrioridade() <= c.getIdade()) {
 
 					if (c.getEstadoVacinacao() == EstadoVacinacao.NAO_HABILITADO) {
-						c.alterarEstadoVacinacao(EstadoVacinacao.HABILITADO_PRIMEIRA_DOSE);
+						c.notifica();
 						dosesDisponiveis--;
 					}
 				}
 			}
-			if (numeroDaDose == 2) {
+			/*if (numeroDaDose == 2) {
 				if (c.getEstadoVacinacao() == EstadoVacinacao.ESPERANDO_SEGUNDA_DOSE) {
 					String data1Dose = c.getCarteriaVacinacao().getData1Dose();
 					String nomeVacina = c.getCarteriaVacinacao().getNomeVacina();
@@ -96,7 +89,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 						dosesDisponiveis--;
 					}
 				}
-			}
+			}*/
 			cont++;
 		}
 	}
@@ -115,6 +108,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		c.getCarteriaVacinacao().setNumeroDaDose(numeroDose);
 		c.getCarteriaVacinacao().setNomeVacina(nomeVacina);
 		c.getCarteriaVacinacao().setLoteVacina(loteVacina);
+		c.notifica();
 		lv.setDoses(lv.getDoses() - 1);
 	}
 }

@@ -23,16 +23,18 @@ public class VacinaApiController {
     @RequestMapping(value = "/vacinas", method=RequestMethod.GET)
     public ResponseEntity<?> listarVacinas() {
         List<Vacina> vacinas = vacinaService.listarVacinas();
-         if(vacinas.isEmpty())
+         if(vacinas.isEmpty()){
              return ErroVacina.erroSemVacinasCadastrada();
+         }
         return new ResponseEntity<List<Vacina>>(vacinas, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/vacina/", method=RequestMethod.POST)
     public ResponseEntity<?> cadastrarVacina(@RequestBody Vacina novaVacina, UriComponentsBuilder uciBuilder) {
         Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(novaVacina.getNomeVacina());
-         if(optionalVacina.isPresent())
+         if(optionalVacina.isPresent()){
              return ErroVacina.erroVacinaJaCadastrada(novaVacina.getNomeVacina());
+         }
         vacinaService.salvarVacina(novaVacina);
         return new ResponseEntity<String>("Vacina Cadastradada", HttpStatus.CREATED);
     }
@@ -40,16 +42,18 @@ public class VacinaApiController {
     @RequestMapping(value = "/vacina/{id}", method=RequestMethod.GET)
     public ResponseEntity<?> consultarVacina(@PathVariable("id") String id) {
         Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(id);
-         if(!optionalVacina.isPresent())
+         if(!optionalVacina.isPresent()){
              return ErroVacina.erroVacinaNaoEncontrada(id);
+         }
         return new ResponseEntity<Vacina>(optionalVacina.get(), HttpStatus.OK);
     }
     
     @RequestMapping(value = "/vacina/{id}", method=RequestMethod.DELETE)
     public ResponseEntity<?> removerVacina(@PathVariable("id") String id) {
         Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(id);
-        if(!optionalVacina.isPresent())
+        if(!optionalVacina.isPresent()){
              return ErroVacina.erroVacinaNaoEncontrada(id);
+        }
         vacinaService.removerVacina(id);
         return new ResponseEntity<Vacina>(HttpStatus.NO_CONTENT);
     }
