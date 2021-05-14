@@ -117,6 +117,7 @@ public class FuncionarioApiController {
 		 */
 		
 		funcionarioService.registrarVacinacaoDeCidadao(cpf, dataVacinacao, loteVacina, nomeVacina, numeroDose);
+		cidadaoService.salvarCidadao(optionalCidadao.get()); // Novo. Verificar se está ok.
 		return new ResponseEntity<String>("Vacinação registrada com sucesso", HttpStatus.OK);
 	}
 
