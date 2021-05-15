@@ -79,14 +79,10 @@ public class FuncionarioApiController {
 	}
 
 	@RequestMapping(value = "/funcionario/cidadao", method = RequestMethod.PUT)
-	public ResponseEntity<?> habilitarCidadaoParaVacinacao(@RequestBody PerfilVacinacao perfil,int numeroDaDose) {
-		if(numeroDaDose > 2){
-			return ErroVacina.erroVacinaNumeroDeDoseInvalido();
-		}
+	public ResponseEntity<?> habilitarCidadaoParaVacinacao(@RequestBody PerfilVacinacao perfil) {
 		int dosesDisponiveis = loteService.numeroTotalDoses();
-		funcionarioService.habilitarCidadaoParaVacinacao(dosesDisponiveis, perfil, numeroDaDose);
-		return new ResponseEntity<String>("Cidadão habilitado para vacinação", HttpStatus.OK);
-		
+		funcionarioService.habilitarCidadaoParaVacinacao(dosesDisponiveis, perfil);
+		return new ResponseEntity<String>("Cidadão habilitado para a 1ª dose.", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/funcionario/cidadao/carteira", method = RequestMethod.PUT)

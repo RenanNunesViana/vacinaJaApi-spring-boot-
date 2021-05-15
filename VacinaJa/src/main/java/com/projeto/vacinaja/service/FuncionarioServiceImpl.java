@@ -46,9 +46,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	}
 
 	@Override
-	public void habilitarCidadaoParaVacinacao(int dosesDisponiveis, PerfilVacinacao perfil, int numeroDaDose) {
-		//SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-		//long diasDiferenca = 0;
+	public void habilitarCidadaoParaVacinacao(int dosesDisponiveis, PerfilVacinacao perfil) {
 
 		List<Cidadao> cidadaos = this.cidadaoRepository.findAll();
 		List<String> comorbidades = perfil.getListaDeComorbidades();
@@ -57,39 +55,14 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		int cont = 0;
 		while (dosesDisponiveis > 0 && cidadaos.size() >= cont) {
 			Cidadao c = cidadaos.get(cont);
+			if (comorbidades.contains(c.getComorbidade()) || profissoes.contains(c.getProfissao())
+					|| perfil.getIdadeDePrioridade() <= c.getIdade()) {
 
-			if (numeroDaDose == 1) {
-				if (comorbidades.contains(c.getComorbidade()) || profissoes.contains(c.getProfissao())
-						|| perfil.getIdadeDePrioridade() <= c.getIdade()) {
-
-					if (c.getEstadoVacinacao() == EstadoVacinacao.NAO_HABILITADO) {
-						c.notifica();
-						dosesDisponiveis--;
-					}
+				if (c.getEstadoVacinacao() == EstadoVacinacao.NAO_HABILITADO) {
+					c.notifica();
+					dosesDisponiveis--;
 				}
 			}
-			/*if (numeroDaDose == 2) {
-				if (c.getEstadoVacinacao() == EstadoVacinacao.ESPERANDO_SEGUNDA_DOSE) {
-					String data1Dose = c.getCarteriaVacinacao().getData1Dose();
-					String nomeVacina = c.getCarteriaVacinacao().getNomeVacina();
-
-					int diasEntreDoses = vacinaRepository.getOne(nomeVacina).getDiasEntreDoses();
-
-					try {
-						Date data1 = data.parse(data1Dose);
-						Date data2 = new Date(System.currentTimeMillis());
-
-						long diff = data2.getTime() - data1.getTime();
-						diasDiferenca = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					if (diasDiferenca >= diasEntreDoses) {
-						c.alterarEstadoVacinacao(EstadoVacinacao.HABILITADO_SEGUNDA_DOSE);
-						dosesDisponiveis--;
-					}
-				}
-			}*/
 			cont++;
 		}
 	}
