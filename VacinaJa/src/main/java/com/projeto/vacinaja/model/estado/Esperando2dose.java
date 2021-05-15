@@ -1,14 +1,18 @@
 package com.projeto.vacinaja.model.estado;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.projeto.vacinaja.model.usuario.Cidadao;
+import com.projeto.vacinaja.service.CidadaoService;
 
 public class Esperando2dose implements EstadoInterface{
 
+	@Autowired
+	CidadaoService cidadaoService;
 	public void proximoEstado(Cidadao cidadao) {
-		// WIP
-		// if(this.cidadao.getDataVacinacao() >= diasNecessarios2dose)
-			// this.cidadao.alterarEstadoVacinacao(new Habilitado2dose(this.cidadao));
+		cidadao.alterarEstadoVacinacao(EstadoVacinacao.HABILITADO_SEGUNDA_DOSE);
+		cidadaoService.salvarCidadao(cidadao);
 	}
 	
 	@Override
