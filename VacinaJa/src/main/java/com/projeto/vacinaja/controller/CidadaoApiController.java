@@ -3,8 +3,10 @@ package com.projeto.vacinaja.controller;
 import com.projeto.vacinaja.model.Agendamento;
 import com.projeto.vacinaja.model.estado.*;
 import com.projeto.vacinaja.model.usuario.Cidadao;
+import com.projeto.vacinaja.model.usuario.Role;
 import com.projeto.vacinaja.model.vacina.LoteVacina;
 import com.projeto.vacinaja.model.vacina.Vacina;
+import com.projeto.vacinaja.repository.RoleRepository;
 import com.projeto.vacinaja.service.AgendamentoService;
 import com.projeto.vacinaja.service.CidadaoService;
 import com.projeto.vacinaja.service.LoteVacinaService;
@@ -13,8 +15,11 @@ import com.projeto.vacinaja.util.ErroCidadao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 
 @RestController
@@ -22,6 +27,9 @@ import java.util.Optional;
 @CrossOrigin
 public class CidadaoApiController {
 
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
     CidadaoService cidadaoService;
 
@@ -33,16 +41,22 @@ public class CidadaoApiController {
 
     @Autowired
     VacinaService vacinaService;
+    
+    @Autowired
+    RoleRepository roleRepository;
 
     @RequestMapping(value = "/cidadao/", method=RequestMethod.POST)
-    public ResponseEntity<?> cadastrarDadosCidadao(@RequestBody String cpf, String nome, String endereco, String email, String telefone, String dataDeNascimento,
-                    String numeroSUS, String profissao) {
+    public ResponseEntity<?> cadastrarDadosCidadao(String cpf, String nome, String endereco, String email, String telefone, String dataDeNascimento,
+                    String numeroSUS, String profissao, String userName, String password) {
         // WIP
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         if(optionalCidadao.isPresent()) {
             return ErroCidadao.erroCidadaoJaCadastrado();
         }
-        Cidadao novoCidadao = new Cidadao(nome, endereco, cpf, email, dataDeNascimento, telefone, numeroSUS, profissao);
+        Collection<Role> cidadaoRole = new HashSet<>();
+        cidadaoRole.add(roleRepository.findByName("CIDADAO"));
+        
+        Cidadao novoCidadao = new Cidadao(nome, endereco, cpf, email, dataDeNascimento, telefone, numeroSUS, profissao, userName, passwordEncoder.encode(password), cidadaoRole);
         cidadaoService.salvarCidadao(novoCidadao);
         return new ResponseEntity<String>("Cidadão cadastrado", HttpStatus.CREATED);
     }

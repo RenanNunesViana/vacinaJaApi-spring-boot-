@@ -1,13 +1,17 @@
 package com.projeto.vacinaja.model.usuario;
 
-import com.projeto.vacinaja.model.estado.EstadoVacinacao;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
-public abstract class Usuario {
+public class Usuario {
 	
 	@Id
 	public String cpf;
@@ -18,12 +22,22 @@ public abstract class Usuario {
 	public String telefone;
 	public String comorbidade;
 	public int idade;
+	public String userName;
+	public String password;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+			joinColumns = @JoinColumn(
+					name = "user_id", referencedColumnName = "cpf"),
+			inverseJoinColumns = @JoinColumn(
+					name = "role_id", referencedColumnName = "id"))
+	public Collection<Role> roles;
 	
 	public Usuario() {
 	}
 	
 	public Usuario(String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
-			String telefone, String comorbidade) {
+			String telefone, String comorbidade, String username, String password, Collection<Role> roles) {
 		super();
 		this.nomeCompleto = nomeCompleto;
 		this.endereco = endereco;
@@ -31,17 +45,9 @@ public abstract class Usuario {
 		this.email = email;
 		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
-	}
-	
-	public Usuario(String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
-			String telefone, EstadoVacinacao estadoVacinacao, String comorbidade) {
-		super();
-		this.nomeCompleto = nomeCompleto;
-		this.endereco = endereco;
-		this.cpf = cpf;
-		this.email = email;
-		this.dataNascimento = dataNascimento;
-		this.telefone = telefone;
+		this.userName = username;
+		this.password = password;
+		this.roles = roles;
 	}
 
 	public String getNomeCompleto() {
@@ -75,4 +81,29 @@ public abstract class Usuario {
 	public int getIdade() {
 		return this.idade;
 	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+	
 }

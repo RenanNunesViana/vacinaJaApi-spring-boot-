@@ -1,7 +1,8 @@
 package com.projeto.vacinaja.model.usuario;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
-import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 
 @Entity
 public class Funcionario extends Usuario {
@@ -12,12 +13,17 @@ public class Funcionario extends Usuario {
 	public Funcionario() {
 	}
 
-	public Funcionario(Long id, String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
-			String telefone, EstadoVacinacao estadoVacinacao, String comorbidade, String cargo, String localTrabalho) {
-		super(nomeCompleto, endereco, cpf, email, dataNascimento, telefone, estadoVacinacao, comorbidade);
+	
+
+	public Funcionario(String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
+			String telefone, String comorbidade, String cargo, String localTrabalho, String username, String password, Collection<Role> roles) {
+		super(nomeCompleto, endereco, cpf, email, dataNascimento, telefone, comorbidade, username, password, roles);
+		
 		this.cargo = cargo;
 		this.localTrabalho = localTrabalho;
 	}
+
+
 
 	public String getCpf() {
 		return this.cpf;

@@ -1,7 +1,7 @@
 package com.projeto.vacinaja.controller;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import com.projeto.vacinaja.model.vacina.Vacina;
 

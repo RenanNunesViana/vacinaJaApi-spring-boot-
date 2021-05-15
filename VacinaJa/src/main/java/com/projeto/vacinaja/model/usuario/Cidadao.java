@@ -5,6 +5,8 @@ import com.projeto.vacinaja.model.estado.EstadoVacinacao;
 import com.projeto.vacinaja.model.vacina.CarteiraVacinacao;
 import com.sun.istack.NotNull;
 
+import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,9 +32,9 @@ public class Cidadao extends Usuario implements Notificavel{
 	}
 	
 	public Cidadao(String nome, String endereco, String cpf, String email, String dataNascimento, String telefone,
-				String numeroSUS, String profissao) {
+				String numeroSUS, String profissao, String username, String password, Collection<Role> roles) {
 				
-		super(nome, endereco, cpf, email, dataNascimento, telefone, "");
+		super(nome, endereco, cpf, email, dataNascimento, telefone, "", username, password, roles);
 		this.numeroSUS = numeroSUS;
 		this.profissao = profissao;
 		this.carteiraVacinacao = new CarteiraVacinacao();
