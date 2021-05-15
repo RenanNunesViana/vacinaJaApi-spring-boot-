@@ -40,7 +40,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		authorizeRequests().
 		antMatchers("/api/cidadao").hasAnyAuthority("ADMIN", "CIDADAO").
 		antMatchers("/api/funcionarios", "/api/funcionario/").hasAnyAuthority("ADMIN","FUNCIONARIO").
-		anyRequest().authenticated().and().formLogin();
+		anyRequest().authenticated().and().formLogin().defaultSuccessUrl("http://localhost:8080/swagger-ui.html").
+		failureUrl("/login?error=true").permitAll()
+		.and()
+		.logout().logoutSuccessUrl("/login").permitAll();
 	}
 	
 	@Override
