@@ -8,6 +8,7 @@ public class Funcionario extends Usuario {
 
 	public String cargo;
 	public String localTrabalho;
+	public boolean aprovacao;
 
 	public Funcionario() {
 	}
@@ -17,6 +18,7 @@ public class Funcionario extends Usuario {
 		super(nomeCompleto, endereco, cpf, email, dataNascimento, telefone, estadoVacinacao, comorbidade);
 		this.cargo = cargo;
 		this.localTrabalho = localTrabalho;
+		this.aprovacao = false;
 	}
 
 	public String getCpf() {
@@ -30,5 +32,15 @@ public class Funcionario extends Usuario {
 	public void setLocalTrabalho(String cargo) {
 		this.cargo = cargo;
 	}
+
+	public boolean getAprovacao() {
+		return aprovacao;
+	}
+
+	public void setAprovacao(boolean aprovacao) {
+		this.aprovacao = aprovacao;
+	}
+	
+	
 
 }
