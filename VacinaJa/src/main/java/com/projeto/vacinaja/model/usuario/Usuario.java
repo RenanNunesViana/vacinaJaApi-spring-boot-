@@ -14,14 +14,14 @@ import javax.persistence.ManyToMany;
 public class Usuario {
 	
 	@Id
-	public String cpf;
-	public String nomeCompleto;
-	public String endereco;
-	public String email;
-	public String dataNascimento;
-	public String telefone;
-	public String comorbidade;
-	public int idade;
+	protected String cpf;
+	protected String nomeCompleto;
+	protected String endereco;
+	protected String email;
+	protected String dataNascimento;
+	protected String telefone;
+	protected String comorbidade;
+	protected int idade;
 	public String userName;
 	public String password;
 	
