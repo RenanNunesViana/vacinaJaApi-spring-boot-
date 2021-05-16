@@ -27,7 +27,7 @@ public class VerificadorParaSegundaDose {
 	@Autowired
 	VacinaService vacinaService;
 	
-	private static final String MEIO_DIA = "0 0 12";
+	private static final String MEIO_DIA = "0 0 12 30 12 6";
 
 	@Scheduled(cron = MEIO_DIA)
 	public void verificaPorDia() {
