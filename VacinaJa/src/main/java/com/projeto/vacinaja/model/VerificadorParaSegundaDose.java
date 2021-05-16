@@ -27,9 +27,9 @@ public class VerificadorParaSegundaDose {
 	@Autowired
 	VacinaService vacinaService;
 	
-	private static final int DIA = 1000 * 60 * 60 * 24;
+	private static final String MEIO_DIA = "0 0 12";
 
-	@Scheduled(fixedRate = DIA)
+	@Scheduled(cron = MEIO_DIA)
 	public void verificaPorDia() {
 		List<Cidadao> cidadaos = cidadaoService.listarCidadao();
 		for(Cidadao cidadao: cidadaos) {
