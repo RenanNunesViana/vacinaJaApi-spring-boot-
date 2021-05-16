@@ -59,7 +59,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 					|| perfil.getIdadeDePrioridade() <= c.getIdade()) {
 
 				if (c.getEstadoVacinacao() == EstadoVacinacao.NAO_HABILITADO) {
-					c.notifica();
+					c.notificarMudancaEstado();
 					dosesDisponiveis--;
 				}
 			}
@@ -81,7 +81,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		c.getCarteriaVacinacao().setNumeroDaDose(numeroDose);
 		c.getCarteriaVacinacao().setNomeVacina(nomeVacina);
 		c.getCarteriaVacinacao().setLoteVacina(loteVacina);
-		c.notifica();
+		c.notificarMudancaEstado();
 		lv.setDoses(lv.getDoses() - 1);
 	}
 

@@ -47,7 +47,7 @@ public class CidadaoApiController {
     RoleRepository roleRepository;
 
     @RequestMapping(value = "/cidadao/", method=RequestMethod.POST)
-    public ResponseEntity<?> cadastrarDadosCidadao(String cpf, String nome, String endereco, String email, String telefone, String dataDeNascimento,
+    public ResponseEntity<?> cadastrarDadosCidadao(@RequestBody String cpf, String nome, String endereco, String email, String telefone, String dataDeNascimento,
                     String numeroSUS, String profissao, String userName, String password) {
         Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
         if(optionalCidadao.isPresent()) {

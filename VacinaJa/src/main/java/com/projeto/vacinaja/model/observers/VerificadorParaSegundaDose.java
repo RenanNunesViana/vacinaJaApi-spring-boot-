@@ -1,4 +1,4 @@
-package com.projeto.vacinaja.model;
+package com.projeto.vacinaja.model.observers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,7 +38,7 @@ public class VerificadorParaSegundaDose {
 				String nomeVacina = cidadao.getCarteriaVacinacao().getNomeVacina();	
 				Vacina vacina = vacinaService.consultarVacinaPorId(nomeVacina).get();
 				if(verificaDiferencaDias(cidadao.getCarteriaVacinacao().getData1Dose(), vacina.getDiasEntreDoses())){
-					cidadao.notifica();
+					cidadao.notificarMudancaEstado();
 				}
 			}
 		}

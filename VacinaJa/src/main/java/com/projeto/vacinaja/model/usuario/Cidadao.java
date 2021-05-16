@@ -1,7 +1,7 @@
 package com.projeto.vacinaja.model.usuario;
 
-import com.projeto.vacinaja.model.Notificavel;
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
+import com.projeto.vacinaja.model.observers.Notificavel;
 import com.projeto.vacinaja.model.vacina.CarteiraVacinacao;
 import com.sun.istack.NotNull;
 
@@ -89,9 +89,14 @@ public class Cidadao extends Usuario implements Notificavel{
 	}
 
 	@Override
-	public void notifica() {
+	public void notificarMudancaEstado() {
 		this.estadoVacinacao.proximoEstado(this);
 		// sendEmail();
 		// testando
+	}
+
+	@Override
+	public String notificarHabilitado() {
+		return "Cidadao está habilitado para vacinação. Ver detalhes no site.";	
 	}
 }
