@@ -91,6 +91,6 @@ public class Cidadao extends Usuario implements Notificavel{
 	@Override
 	public void notifica() {
 		this.estadoVacinacao.proximoEstado(this);
-		
+		// sendEmail();
 	}
 }
