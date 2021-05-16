@@ -14,7 +14,6 @@ public class Agendamento {
     private String cpf;
 
     private int dose;
-
     
     private String data;
     
