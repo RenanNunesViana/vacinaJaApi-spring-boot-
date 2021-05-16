@@ -31,15 +31,24 @@ public class DataLoader implements CommandLineRunner{
 		roleRepository.save(new Role("CIDADAO"));
 		roleRepository.save(new Role("FUNCIONARIO"));
 		
-		Role role1 = roleRepository.findByName("CIDADAO");
+		Role role1 = roleRepository.findByName("ADMIN");
 		Collection<Role> colRole1 = new HashSet<>();
 		colRole1.add(role1);
-		
 		Usuario user = new Usuario("teste", null, "1", null, null,
 				null, null, "teste", passwordEnconder.encode("123456"), colRole1);
-		
 		userRepository.save(user);
-	
+		Role role2 = roleRepository.findByName("CIDADAO");
+		Collection<Role> colRole2 = new HashSet<>();
+		colRole2.add(role2);
+		user = new Usuario("teste", null, "2", null, null,
+				null, null, "cidadao", passwordEnconder.encode("123"), colRole2);
+		userRepository.save(user);
+		Role role3 = roleRepository.findByName("FUNCIONARIO");
+		Collection<Role> colRole3 = new HashSet<>();
+		colRole3.add(role3);
+		user = new Usuario("teste", null, "2", null, null,
+				null, null, "funcionario", passwordEnconder.encode("123"), colRole3);
+		userRepository.save(user);
 	}
 
 }

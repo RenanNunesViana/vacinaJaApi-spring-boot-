@@ -42,7 +42,7 @@ public class FuncionarioApiController {
 	@Autowired
 	LoteVacinaService loteService;
 
-	@RequestMapping(value = "/funcionarios", method = RequestMethod.GET)
+	@RequestMapping(value = "/funcionario/listar", method = RequestMethod.GET)
 	public ResponseEntity<?> listarFuncionarios() {
 		List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
 		if (funcionarios.isEmpty()) {

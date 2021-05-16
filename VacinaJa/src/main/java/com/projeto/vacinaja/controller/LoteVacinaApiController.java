@@ -24,7 +24,7 @@ public class LoteVacinaApiController {
 	@Autowired
 	LoteVacinaService loteVacinaService;
 
-	@RequestMapping(value = "/lotes", method = RequestMethod.GET)
+	@RequestMapping(value = "/vacina/lotes", method = RequestMethod.GET)
 	public ResponseEntity<?> listarLotes() {
 		List<LoteVacina> lotes = loteVacinaService.listarLotesVacinas();
 		if (lotes.isEmpty()){

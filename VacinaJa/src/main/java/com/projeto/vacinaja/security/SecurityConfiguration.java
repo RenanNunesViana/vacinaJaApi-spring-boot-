@@ -38,8 +38,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable().
 		authorizeRequests().
-		antMatchers("/api/cidadao").hasAnyAuthority("ADMIN", "CIDADAO").
-		antMatchers("/api/funcionarios", "/api/funcionario/").hasAnyAuthority("ADMIN","FUNCIONARIO").
+		antMatchers("/api/*").hasAuthority("ADMIN").
+		antMatchers("/api/cidadao/*").hasAnyAuthority("CIDADAO", "ADMIN").
+		antMatchers("/api/funcionario/*").hasAnyAuthority("FUNCIONARIO", "ADMIN").
+		antMatchers("/api/vacina/*").hasAnyAuthority("FUNCIONARIO", "ADMIN").
 		anyRequest().authenticated().and().formLogin().defaultSuccessUrl("http://localhost:8080/swagger-ui.html").
 		failureUrl("/login?error=true").permitAll()
 		.and()

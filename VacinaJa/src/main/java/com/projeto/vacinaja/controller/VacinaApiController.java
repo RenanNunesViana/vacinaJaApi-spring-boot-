@@ -20,7 +20,7 @@ public class VacinaApiController {
     @Autowired
     VacinaService vacinaService;
 
-    @RequestMapping(value = "/vacinas", method=RequestMethod.GET)
+    @RequestMapping(value = "/vacina/listar", method=RequestMethod.GET)
     public ResponseEntity<?> listarVacinas() {
         List<Vacina> vacinas = vacinaService.listarVacinas();
          if(vacinas.isEmpty()){
