@@ -10,6 +10,7 @@ public class ErroLoteVacina {
 	static final String LOTE_JA_CADASTRADO = "Lote %s já cadastrado.";
 	static final String LOTE_NAO_EH_DESSA_VACINA = "O lote %s não é da vacina %s.";
 	static final String LOTE_SEM_DOSES = "O lote não possui mais doses";
+	static final String LOTE_FORA_DA_VALIDADE = "Doses desse lote não estão vencidas.";
 
 	public static ResponseEntity<CustomErrorType> erroLoteVacinaNaoCadastrada(long idLote) {
 		return new ResponseEntity<CustomErrorType>(
@@ -35,6 +36,10 @@ public class ErroLoteVacina {
 
 	public static ResponseEntity<CustomErrorType> erroLoteVacinaSemDoses() {
 		return new ResponseEntity<CustomErrorType>(new CustomErrorType(ErroLoteVacina.LOTE_SEM_DOSES),
+				HttpStatus.CONFLICT);
+	}
+	public static ResponseEntity<CustomErrorType> erroLoteVacinaForaDaValidade() {
+		return new ResponseEntity<CustomErrorType>(new CustomErrorType(ErroLoteVacina.LOTE_FORA_DA_VALIDADE),
 				HttpStatus.CONFLICT);
 	}
 
