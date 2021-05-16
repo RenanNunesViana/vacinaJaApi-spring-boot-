@@ -28,8 +28,9 @@ public class VerificadorParaSegundaDose {
 	VacinaService vacinaService;
 	
 	private static final String MEIO_DIA = "0 0 12 30 12 6";
+	private static final String TIME_ZONE = "America/Sao_Paulo";
 
-	@Scheduled(cron = MEIO_DIA)
+	@Scheduled(cron = MEIO_DIA, zone = TIME_ZONE)
 	public void verificaPorDia() {
 		List<Cidadao> cidadaos = cidadaoService.listarCidadao();
 		for(Cidadao cidadao: cidadaos) {
