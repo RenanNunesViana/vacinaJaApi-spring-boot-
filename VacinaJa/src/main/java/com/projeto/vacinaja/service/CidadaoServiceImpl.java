@@ -42,10 +42,5 @@ public class CidadaoServiceImpl implements CidadaoService{
 		Cidadao aux = this.cidadaoRepository.getOne(cpf);
 		return aux.getEstadoVacinacao();
 	}
-
-	@Override
-	public String agendarVacinacao(String cpf) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

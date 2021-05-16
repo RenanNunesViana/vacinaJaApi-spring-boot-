@@ -13,5 +13,4 @@ public interface CidadaoService {
     public List <Cidadao> listarCidadao();
     public Optional<Cidadao> pegarCidadao(String cpf);
     public EstadoVacinacao consultarEstagioVacinacao(String cpf);
-    public String agendarVacinacao(String cpf);
 }
