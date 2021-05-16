@@ -92,5 +92,6 @@ public class Cidadao extends Usuario implements Notificavel{
 	public void notifica() {
 		this.estadoVacinacao.proximoEstado(this);
 		// sendEmail();
+		// testando
 	}
 }
