@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ca21338e-de61-4edb-b903-5435f33dd792" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/CidadaoApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/CidadaoApiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/FuncionarioApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/FuncionarioApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/LoteVacinaApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/LoteVacinaApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/VacinaApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/controller/VacinaApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/service/LoteVacinaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/service/LoteVacinaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/service/LoteVacinaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/service/LoteVacinaServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/CidadaoErro.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/ErroCidadao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/FuncionarioErro.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/ErroFuncionario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/ErroLoteVacina.java" beforeDir="false" afterPath="$PROJECT_DIR$/VacinaJa/src/main/java/com/projeto/vacinaja/util/ErroLoteVacina.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,15 +45,13 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -83,6 +75,7 @@
       <workItem from="1620168308188" duration="6962000" />
       <workItem from="1620440813490" duration="5000" />
       <workItem from="1620771122102" duration="12033000" />
+      <workItem from="1621165837500" duration="3520000" />
     </task>
     <servers />
   </component>
