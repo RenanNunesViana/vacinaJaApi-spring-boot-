@@ -1,7 +1,7 @@
 package com.projeto.vacinaja.controller;
 
-import com.projeto.vacinaja.model.usuario.Funcionario;
-import com.projeto.vacinaja.service.FuncionarioService;
+import com.projeto.vacinaja.model.usuario.Usuario;
+import com.projeto.vacinaja.service.UsuarioService;
 import com.projeto.vacinaja.util.ErroFuncionario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,19 +20,16 @@ import java.util.Optional;
 public class AdmApiController {
 
 	@Autowired
-	FuncionarioService funcionarioService;
+	UsuarioService usuarioService;
 
-	@RequestMapping(value = "/funcionarios", method = RequestMethod.PUT)
+	@RequestMapping(value = "/admin", method = RequestMethod.PUT)
 	public ResponseEntity<?> aprovaCadastroFuncionario(@PathVariable String cpfFuncionario) {
-		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionario(cpfFuncionario);
+		Optional<Usuario> optionalFuncionario = usuarioService.retornaUsuarioPeloCpf(cpfFuncionario);
 		if(!optionalFuncionario.isPresent()) {
 			return ErroFuncionario.erroFuncionarioNaoEncontrado();
 		}
-		if(optionalFuncionario.get().getAprovacao()) {
-			return ErroFuncionario.erroFuncionarioJaAprovado();
-		}
-		funcionarioService.aprovaFuncionario(cpfFuncionario);
-		return new ResponseEntity<Funcionario>((Funcionario) null, HttpStatus.ACCEPTED);
+		usuarioService.aprovaFuncionario(cpfFuncionario);
+		return new ResponseEntity<Usuario>((Usuario) null, HttpStatus.ACCEPTED);
 		
 	}
 

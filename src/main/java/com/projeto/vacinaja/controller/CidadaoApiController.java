@@ -2,14 +2,14 @@ package com.projeto.vacinaja.controller;
 
 import com.projeto.vacinaja.model.Agendamento;
 import com.projeto.vacinaja.model.estado.*;
-import com.projeto.vacinaja.model.usuario.Cidadao;
 import com.projeto.vacinaja.model.usuario.Role;
+import com.projeto.vacinaja.model.usuario.Usuario;
 import com.projeto.vacinaja.model.vacina.LoteVacina;
 import com.projeto.vacinaja.model.vacina.Vacina;
 import com.projeto.vacinaja.repository.RoleRepository;
 import com.projeto.vacinaja.service.AgendamentoService;
-import com.projeto.vacinaja.service.CidadaoService;
 import com.projeto.vacinaja.service.LoteVacinaService;
+import com.projeto.vacinaja.service.UsuarioService;
 import com.projeto.vacinaja.service.VacinaService;
 import com.projeto.vacinaja.util.ErroAgendamento;
 import com.projeto.vacinaja.util.ErroCidadao;
@@ -32,7 +32,7 @@ public class CidadaoApiController {
 	BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
-    CidadaoService cidadaoService;
+    UsuarioService usuarioService;
 
     @Autowired
     AgendamentoService agendamentoService;
@@ -46,41 +46,41 @@ public class CidadaoApiController {
     @Autowired
     RoleRepository roleRepository;
 
-    @RequestMapping(value = "/cidadao/", method=RequestMethod.POST)
-    public ResponseEntity<?> cadastrarDadosCidadao(@RequestBody String cpf, String nome, String endereco, String email, String telefone, String dataDeNascimento,
-                    String numeroSUS, String profissao, String userName, String password) {
-        Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
+    @RequestMapping(value = "/cadastro", method=RequestMethod.POST)
+    public ResponseEntity<?> cadastrarDadosCidadao(String cpf, String nome, String endereco, String email, String telefone, String dataDeNascimento,
+                    int idade, String numeroSUS, String profissao, String userName, String password) {
+        Optional<Usuario> optionalCidadao = usuarioService.retornaUsuarioPeloCpf(cpf);
         if(optionalCidadao.isPresent()) {
             return ErroCidadao.erroCidadaoJaCadastrado();
         }
         Collection<Role> cidadaoRole = new HashSet<>();
         cidadaoRole.add(roleRepository.findByName("CIDADAO"));
         
-        Cidadao novoCidadao = new Cidadao(nome, endereco, cpf, email, dataDeNascimento, telefone, numeroSUS, profissao, userName, passwordEncoder.encode(password), cidadaoRole);
-        cidadaoService.salvarCidadao(novoCidadao);
+        Usuario novoCidadao = new Usuario(cpf, nome, endereco, email, dataDeNascimento, telefone, dataDeNascimento, idade, numeroSUS, profissao, null, null, userName, passwordEncoder.encode(password), cidadaoRole);
+        usuarioService.cadastrarUsuario(novoCidadao);
         return new ResponseEntity<String>("Cidadão cadastrado", HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/cidadao/{cpf}", method = RequestMethod.PUT)
-    public ResponseEntity<?> atualizarCadastro(@PathVariable("cpf")String cpf, @RequestBody String nomeCompleto, String endereco, String email, String telefone, String profissao) {
-        Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
+    public ResponseEntity<?> atualizarCadastro(@PathVariable("cpf")String cpf, String nomeCompleto, String endereco, String email, String telefone, String profissao) {
+        Optional<Usuario> optionalCidadao = usuarioService.retornaUsuarioPeloCpf(cpf);
          if(!optionalCidadao.isPresent()) {
             return ErroCidadao.erroCidadaoNaoEncontrado();
         }
-        Cidadao tempCidadao = optionalCidadao.get();
-        tempCidadao.alteraNomeCompleto(nomeCompleto);
-        tempCidadao.alteraEndereco(endereco);
-        tempCidadao.alteraEmail(email);
-        tempCidadao.alteraTelefone(telefone);
-        tempCidadao.alteraProfissao(profissao);
+        Usuario tempCidadao = optionalCidadao.get();
+        tempCidadao.setNomeCompleto(nomeCompleto);
+        tempCidadao.setEndereco(endereco);
+        tempCidadao.setEmail(email);
+        tempCidadao.setTelefone(telefone);
+        tempCidadao.setProfissao(profissao);
         
-        cidadaoService.salvarCidadao(tempCidadao);
+        usuarioService.cadastrarUsuario(tempCidadao);
        return new ResponseEntity<String>("Dados atualizados com sucesso", HttpStatus.OK); 
     }
 	
     @RequestMapping(value = "/cidadao/{cpf}/estadovacinacao", method= RequestMethod.GET)
     public ResponseEntity<?> checarEstadoVacinacao(@PathVariable("cpf")String cpf) {
-        Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
+        Optional<Usuario> optionalCidadao = usuarioService.retornaUsuarioPeloCpf(cpf);
         if(!optionalCidadao.isPresent()) {
             return ErroCidadao.erroCidadaoNaoEncontrado();
         }
@@ -89,12 +89,12 @@ public class CidadaoApiController {
 
     @RequestMapping(value = "/cidadao/{cpf}/agendamento", method = RequestMethod.PUT)
     public ResponseEntity<?> agendarVacinacao(@PathVariable("cpf")String cpf) {
-        Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
+        Optional<Usuario> optionalCidadao = usuarioService.retornaUsuarioPeloCpf(cpf);
         if(!optionalCidadao.isPresent()) {
             return ErroCidadao.erroCidadaoNaoEncontrado();
         }
-        Cidadao currentCidadao = optionalCidadao.get();
-        Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(currentCidadao.getCarteriaVacinacao().getNomeVacina());
+        Usuario currentCidadao = optionalCidadao.get();
+        Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(currentCidadao.getCarteiraVacinacao().getNomeVacina());
         Optional<LoteVacina> optionalLote = loteVacinaService.consultarLotePorVacina(optionalVacina.get());
         boolean habilitado = (currentCidadao.getEstadoVacinacao() == EstadoVacinacao.HABILITADO_SEGUNDA_DOSE) || (currentCidadao.getEstadoVacinacao() == EstadoVacinacao.HABILITADO_PRIMEIRA_DOSE);
         int dose = (currentCidadao.getEstadoVacinacao() == EstadoVacinacao.HABILITADO_PRIMEIRA_DOSE ? 1 : 2);
@@ -106,7 +106,7 @@ public class CidadaoApiController {
 
     @RequestMapping(value = "/cidado/{cpf}/agendamento", method = RequestMethod.GET)
     public ResponseEntity<?> checarAgendamento(@PathVariable("cpf")String cpf) {
-        Optional<Cidadao> cidadao = cidadaoService.pegarCidadao(cpf);
+        Optional<Usuario> cidadao = usuarioService.retornaUsuarioPeloCpf(cpf);
         if(!cidadao.isPresent()){
             return ErroCidadao.erroCidadaoNaoEncontrado();
         }

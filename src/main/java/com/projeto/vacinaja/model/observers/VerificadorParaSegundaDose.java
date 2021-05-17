@@ -13,16 +13,16 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.projeto.vacinaja.model.estado.EstadoVacinacao;
-import com.projeto.vacinaja.model.usuario.Cidadao;
+import com.projeto.vacinaja.model.usuario.Usuario;
 import com.projeto.vacinaja.model.vacina.Vacina;
-import com.projeto.vacinaja.service.CidadaoService;
+import com.projeto.vacinaja.service.UsuarioService;
 import com.projeto.vacinaja.service.VacinaService;
 
 @Component @EnableScheduling
 public class VerificadorParaSegundaDose {
 	
 	@Autowired
-	CidadaoService cidadaoService;
+	UsuarioService usuarioService;
 
 	@Autowired
 	VacinaService vacinaService;
@@ -32,13 +32,15 @@ public class VerificadorParaSegundaDose {
 
 	@Scheduled(cron = MEIO_DIA, zone = TIME_ZONE)
 	public void verificaPorDia() {
-		List<Cidadao> cidadaos = cidadaoService.listarCidadao();
-		for(Cidadao cidadao: cidadaos) {
-			if(cidadao.getEstadoVacinacao() == EstadoVacinacao.ESPERANDO_SEGUNDA_DOSE) {
-				String nomeVacina = cidadao.getCarteriaVacinacao().getNomeVacina();	
-				Vacina vacina = vacinaService.consultarVacinaPorId(nomeVacina).get();
-				if(verificaDiferencaDias(cidadao.getCarteriaVacinacao().getData1Dose(), vacina.getDiasEntreDoses())){
-					cidadao.notificarMudancaEstado();
+		List<Usuario> cidadaos = usuarioService.listarUsuarios();
+		for(Usuario cidadao: cidadaos) {
+			if(!cidadao.isFuncionario()) {				
+				if(cidadao.getEstadoVacinacao() == EstadoVacinacao.ESPERANDO_SEGUNDA_DOSE) {
+					String nomeVacina = cidadao.getCarteiraVacinacao().getNomeVacina();	
+					Vacina vacina = vacinaService.consultarVacinaPorId(nomeVacina).get();
+					if(verificaDiferencaDias(cidadao.getCarteiraVacinacao().getData1Dose(), vacina.getDiasEntreDoses())){
+						cidadao.notificarMudancaEstado();
+					}
 				}
 			}
 		}

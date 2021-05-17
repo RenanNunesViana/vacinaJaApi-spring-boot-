@@ -3,16 +3,17 @@ package com.projeto.vacinaja.model.estado;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.projeto.vacinaja.model.usuario.Cidadao;
-import com.projeto.vacinaja.service.CidadaoService;
+
+import com.projeto.vacinaja.model.usuario.Usuario;
+import com.projeto.vacinaja.service.UsuarioService;
 
 public class Habilitado1Dose implements EstadoInterface{
 	
 	@Autowired
-	CidadaoService cidadaoService;
-	public void proximoEstado(Cidadao cidadao) {
-		cidadao.alterarEstadoVacinacao(EstadoVacinacao.ESPERANDO_SEGUNDA_DOSE);
-		cidadaoService.salvarCidadao(cidadao);
+	UsuarioService usuarioService;
+	public void proximoEstado(Usuario cidadao) {
+		cidadao.setEstadoVacinacao(EstadoVacinacao.ESPERANDO_SEGUNDA_DOSE);
+		usuarioService.cadastrarUsuario(cidadao);
 	}
 	
 	@Override
