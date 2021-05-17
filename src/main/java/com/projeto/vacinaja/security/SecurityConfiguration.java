@@ -18,7 +18,7 @@ import com.projeto.vacinaja.service.UsuarioService;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
+		@Autowired
 	private UsuarioService userService;
 	
 	@Bean
@@ -38,11 +38,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable().
 		authorizeRequests().
-		antMatchers("/api/*").hasAuthority("ADMIN").
-		antMatchers("/api/cidadao/*").hasAnyAuthority("CIDADAO", "ADMIN").
-		antMatchers("/api/funcionario/*").hasAnyAuthority("FUNCIONARIO", "ADMIN").
-		antMatchers("/api/vacina/*").hasAnyAuthority("FUNCIONARIO", "ADMIN").
-		anyRequest().authenticated().and().formLogin().defaultSuccessUrl("http://localhost:8080/swagger-ui.html").
+        antMatchers("/api/cidadao/**", "/api/registroFuncionario/{id}").hasAnyAuthority("CIDADAO", "ADMIN").
+        antMatchers("/api/cadastro").hasAnyAuthority("VISITANTE", "ADMIN").
+        antMatchers("/api/funcionario/*", "/api/funcionarios").hasAnyAuthority("FUNCIONARIO", "ADMIN").
+        antMatchers("/api/vacinas", "/api/lotes", "/api/vacina/**").hasAnyAuthority("FUNCIONARIO", "ADMIN").
+        antMatchers("/api/**").hasAuthority("ADMIN").
+		anyRequest().authenticated().and().formLogin().defaultSuccessUrl("http://localhost:8080/swagger-ui.html").permitAll().
 		failureUrl("/login?error=true").permitAll()
 		.and()
 		.logout().logoutSuccessUrl("/login").permitAll();
@@ -60,13 +61,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-//		auth.inMemoryAuthentication().
-//		withUser("func").
-//		password(passwordEncoder().encode("password")).authorities("FUNCIONARIO").
-//		and().
-//		withUser("user").
-//		password(passwordEncoder().encode("password")).authorities("CIDADAO");
-		
 		auth.authenticationProvider(authenticationProvider());
 	}
 }

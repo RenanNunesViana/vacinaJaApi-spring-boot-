@@ -1,6 +1,6 @@
 package com.projeto.vacinaja.model.estado;
 
-import com.projeto.vacinaja.model.usuario.Cidadao;
+import com.projeto.vacinaja.model.usuario.Usuario;
 
 public enum EstadoVacinacao {
 	NAO_HABILITADO(new NaoHabilitado1Dose()), HABILITADO_PRIMEIRA_DOSE(new Habilitado1Dose()),
@@ -11,7 +11,7 @@ public enum EstadoVacinacao {
 	private EstadoVacinacao(EstadoInterface estadoInterface) {
 		this.estadoInterface = estadoInterface;
 	}
-	public void proximoEstado(Cidadao cidadao) {
-		this.estadoInterface.proximoEstado(cidadao);
+	public void proximoEstado(Usuario usuario) {
+		this.estadoInterface.proximoEstado(usuario);
 	}
 }

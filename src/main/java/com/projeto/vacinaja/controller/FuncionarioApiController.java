@@ -1,13 +1,11 @@
 package com.projeto.vacinaja.controller;
 
 import com.projeto.vacinaja.model.PerfilVacinacao;
-import com.projeto.vacinaja.model.usuario.Cidadao;
-import com.projeto.vacinaja.model.usuario.Funcionario;
+import com.projeto.vacinaja.model.usuario.Usuario;
 import com.projeto.vacinaja.model.vacina.LoteVacina;
 import com.projeto.vacinaja.model.vacina.Vacina;
-import com.projeto.vacinaja.service.CidadaoService;
-import com.projeto.vacinaja.service.FuncionarioService;
 import com.projeto.vacinaja.service.LoteVacinaService;
+import com.projeto.vacinaja.service.UsuarioService;
 import com.projeto.vacinaja.service.VacinaService;
 import com.projeto.vacinaja.util.ErroCidadao;
 import com.projeto.vacinaja.util.ErroFuncionario;
@@ -21,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -31,10 +30,7 @@ import java.util.Optional;
 public class FuncionarioApiController {
 
 	@Autowired
-	FuncionarioService funcionarioService;
-
-	@Autowired
-	CidadaoService cidadaoService;
+	UsuarioService usuarioService;
 
 	@Autowired
 	VacinaService vacinaService;
@@ -44,55 +40,62 @@ public class FuncionarioApiController {
 
 	@RequestMapping(value = "/funcionario/listar", method = RequestMethod.GET)
 	public ResponseEntity<?> listarFuncionarios() {
-		List<Funcionario> funcionarios = funcionarioService.listarFuncionarios();
-		if (funcionarios.isEmpty()) {
-			return ErroFuncionario.erroNenhumFuncionarioCadastrado();
+		List<Usuario> retorno = new ArrayList<>();
+		for(Usuario usuario : usuarioService.listarUsuarios()) {
+			if(usuario.isFuncionario())
+				retorno.add(usuario);
 		}
-		return new ResponseEntity<List<Funcionario>>(funcionarios, HttpStatus.OK);
+		if(retorno.isEmpty())
+			return ErroFuncionario.erroNenhumFuncionarioCadastrado();
+		
+		return new ResponseEntity<List<Usuario>>(retorno, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/funcionario/", method = RequestMethod.POST)
-	public ResponseEntity<?> cadastrarFuncionario(@RequestBody Funcionario novoFuncionario,
-			UriComponentsBuilder uciBuilder) {
-		Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(novoFuncionario.getCpf());
+	@RequestMapping(value = "/registroFuncionario/{id}", method = RequestMethod.POST)
+	public ResponseEntity<?> cadastrarFuncionario(@PathVariable ("id") String cpf, String cargo, String localTrabalho) {
+		Optional<Usuario> optionalCidadao = usuarioService.retornaUsuarioPeloCpf(cpf);
 		if (!optionalCidadao.isPresent()) {
 			return ErroCidadao.erroCidadaoNaoEncontrado();
 		}
-		funcionarioService.cadastrarFuncionario(novoFuncionario);
+		
+		optionalCidadao.get().setCargo(cargo);
+		optionalCidadao.get().setLocalTrabalho(localTrabalho);
+		
+		usuarioService.cadastrarUsuario(optionalCidadao.get());
 		return new ResponseEntity<String>("Funcionário Cadastradado", HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/funcionario/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarFuncionario(@PathVariable("id") String cpf) {
-		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionario(cpf);
-		if (!optionalFuncionario.isPresent()) {
-			return ErroFuncionario.erroFuncionarioNaoEncontrado();
+		Optional<Usuario> optionalFuncionario = usuarioService.retornaUsuarioPeloCpf(cpf);
+		if (optionalFuncionario.isPresent() && optionalFuncionario.get().isFuncionario()) {
+			return new ResponseEntity<Usuario>(optionalFuncionario.get(), HttpStatus.OK);
 		}
-		return new ResponseEntity<Funcionario>(optionalFuncionario.get(), HttpStatus.OK);
+		return ErroFuncionario.erroFuncionarioNaoEncontrado();
 	}
 
 	@RequestMapping(value = "/funcionario/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> removerFuncionario(@PathVariable("id") String cpf) {
-		Optional<Funcionario> optionalFuncionario = funcionarioService.retornaFuncionario(cpf);
-		if (!optionalFuncionario.isPresent()) {
-			return ErroFuncionario.erroFuncionarioNaoEncontrado();
+		Optional<Usuario> optionalFuncionario = usuarioService.retornaUsuarioPeloCpf(cpf);
+		if (optionalFuncionario.isPresent() && optionalFuncionario.get().isFuncionario()) {
+			usuarioService.removerUsuario(cpf);
+			return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
 		}
-		funcionarioService.removerFuncionario(cpf);
-		return new ResponseEntity<Funcionario>(HttpStatus.NO_CONTENT);
+		return ErroFuncionario.erroFuncionarioNaoEncontrado();
 	}
 
-	@RequestMapping(value = "/funcionario/cidadao", method = RequestMethod.PUT)
+	@RequestMapping(value = "/funcionario/habilitarCidadao", method = RequestMethod.PUT)
 	public ResponseEntity<?> habilitarCidadaoParaVacinacao(@RequestBody PerfilVacinacao perfil) {
 		int dosesDisponiveis = loteService.numeroTotalDoses();
-		funcionarioService.habilitarCidadaoParaVacinacao(dosesDisponiveis, perfil);
+		usuarioService.habilitarCidadaoParaVacinacao(dosesDisponiveis, perfil);
 		return new ResponseEntity<String>("Cidadão habilitado para a 1ª dose.", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/funcionario/cidadao/carteira", method = RequestMethod.PUT)
+	@RequestMapping(value = "/funcionario/registrarVacina/carteira", method = RequestMethod.PUT)
 	public ResponseEntity<?> registrarVacinacaoDeCidadao(@RequestBody String cpf, long loteVacina,String nomeVacina, int numeroDose) {
 
 		Optional<Vacina> optionalVacina = vacinaService.consultarVacinaPorId(nomeVacina);
-		Optional<Cidadao> optionalCidadao = cidadaoService.pegarCidadao(cpf);
+		Optional<Usuario> optionalCidadao = usuarioService.retornaUsuarioPeloCpf(cpf);
 		Optional<LoteVacina> optionalLote = loteService.consultarLotePorId(loteVacina);
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 		Date dataAtual = new Date(System.currentTimeMillis());
@@ -126,8 +129,8 @@ public class FuncionarioApiController {
 			return ErroLoteVacina.erroLoteVacinaForaDaValidade();
 		}
 
-		funcionarioService.registrarVacinacaoDeCidadao(cpf, String.valueOf(dataAtual), loteVacina, nomeVacina, numeroDose);
-		cidadaoService.salvarCidadao(optionalCidadao.get()); // Novo. Verificar se está ok.
+		usuarioService.registrarVacinacaoDeCidadao(cpf, String.valueOf(dataAtual), loteVacina, nomeVacina, numeroDose);
+		usuarioService.cadastrarUsuario(optionalCidadao.get()); // Novo. Verificar se está ok.
 		return new ResponseEntity<String>("Vacinação registrada com sucesso", HttpStatus.OK);
 	}
 

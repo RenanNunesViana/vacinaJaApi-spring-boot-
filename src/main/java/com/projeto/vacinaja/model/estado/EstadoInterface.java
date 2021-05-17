@@ -1,8 +1,8 @@
 package com.projeto.vacinaja.model.estado;
 
-import com.projeto.vacinaja.model.usuario.Cidadao;
+import com.projeto.vacinaja.model.usuario.Usuario;
 
 public interface EstadoInterface {
 
-	public void proximoEstado(Cidadao cidadao);
+	public void proximoEstado(Usuario usuario);
 }
