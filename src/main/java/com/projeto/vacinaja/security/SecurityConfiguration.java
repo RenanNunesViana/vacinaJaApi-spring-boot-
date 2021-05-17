@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         antMatchers("/api/funcionario/*", "/api/funcionarios").hasAnyAuthority("FUNCIONARIO", "ADMIN").
         antMatchers("/api/vacinas", "/api/lotes", "/api/vacina/**").hasAnyAuthority("FUNCIONARIO", "ADMIN").
         antMatchers("/api/**").hasAuthority("ADMIN").
-		anyRequest().authenticated().and().formLogin().defaultSuccessUrl("http://localhost:8080/swagger-ui.html").permitAll().
+		anyRequest().authenticated().and().formLogin().defaultSuccessUrl("https://vacinaja-grupo-04.herokuapp.com/swagger-ui.html").permitAll().
 		failureUrl("/login?error=true").permitAll()
 		.and()
 		.logout().logoutSuccessUrl("/login").permitAll();
