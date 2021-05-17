@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import java.util.Date;
 
 /**
  * US 08 - criando o objeto LoteVacina, seus atributos,seu repositorio e o service do seu repositorio

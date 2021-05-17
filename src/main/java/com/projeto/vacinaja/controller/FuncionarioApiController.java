@@ -1,6 +1,7 @@
 package com.projeto.vacinaja.controller;
 
 import com.projeto.vacinaja.model.PerfilVacinacao;
+
 import com.projeto.vacinaja.model.usuario.Usuario;
 import com.projeto.vacinaja.model.vacina.LoteVacina;
 import com.projeto.vacinaja.model.vacina.Vacina;
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
