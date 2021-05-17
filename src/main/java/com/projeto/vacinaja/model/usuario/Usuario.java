@@ -81,20 +81,6 @@ public class Usuario implements Notificavel{
 		this.roles = roles;
 	}
 
-	// public Usuario(String nomeCompleto, String endereco, String cpf, String email, String dataNascimento,
-	// 		String telefone, String comorbidade, String username, String password, Collection<Role> roles) {
-	// 	super();
-	// 	this.nomeCompleto = nomeCompleto;
-	// 	this.endereco = endereco;
-	// 	this.cpf = cpf;
-	// 	this.email = email;
-	// 	this.dataNascimento = dataNascimento;
-	// 	this.telefone = telefone;
-	// 	this.userName = username;
-	// 	this.password = password;
-	// 	this.roles = roles;
-	// }
-	
 	public String getCpf() {
 		return cpf;
 	}
@@ -238,8 +224,6 @@ public class Usuario implements Notificavel{
 	@Override
 	public void notificarMudancaEstado() {
 		this.estadoVacinacao.proximoEstado(this);
-		// sendEmail();
-		// testando
 	}
 
 	@Override
